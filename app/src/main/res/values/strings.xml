@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Kotlin</string>
-    <string name="press_the_button">Press the button. Go on :-D</string>
+    <string name="press_the_button">Enter your name and press the button. Go on :-D</string>
+    <string name="hint">Enter your name</string>
     <string name="press_me">Press Me!</string>
 </resources>

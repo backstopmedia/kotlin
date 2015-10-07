@@ -13,6 +13,14 @@
         android:layout_height="wrap_content"
         android:text="@string/press_the_button"/>
 
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:hint="@string/hint"
+        android:layout_below="@id/text"/>
+
     <Button
         android:id="@+id/button"
         android:layout_width="match_parent"
