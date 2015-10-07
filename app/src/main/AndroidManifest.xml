@@ -8,8 +8,10 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
-        <activity android:name=".hello.JavaHelloActivity" >
-        </activity>
+
+        <activity android:name=".hello.JavaHelloActivity" />
+        <activity android:name=".hello.KotlinHelloActivity" />
+
     </application>
 
 </manifest>

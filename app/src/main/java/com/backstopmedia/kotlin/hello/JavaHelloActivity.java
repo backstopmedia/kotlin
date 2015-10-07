@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.backstopmedia.kotlin.R;
 
@@ -21,8 +20,7 @@ public class JavaHelloActivity extends AppCompatActivity {
         button.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(JavaHelloActivity.this, "Hello World", Toast.LENGTH_SHORT).show();
-                button.setText("Thanks!");
+                button.setText("Hello World!");
             }
         });
     }
