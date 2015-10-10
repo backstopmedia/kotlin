@@ -1,14 +1,18 @@
 package com.backstopmedia.kotlin.twitter
 
+import android.util.Log
+import android.widget.Toast
 import com.twitter.sdk.android.core.Callback
 import com.twitter.sdk.android.core.Result
 import com.twitter.sdk.android.core.TwitterException
 
 fun <T: Any> kallback(onSuccess: (Result<T>) -> Unit = {}): Kallback<T> {
-    return Kallback(onSuccess)
+    return Kallback(onSuccess).onFail {
+        Log.e("kallback", "Something went wrong: $it")
+    }
 }
 
-class Kallback<T: Any>(success: (Result<T>) -> Unit) : Callback<T>() {
+open class Kallback<T: Any>(success: (Result<T>) -> Unit) : Callback<T>() {
 
     private val onSuccess: (Result<T>) -> Unit = success
     private var onFail: (TwitterException) -> Unit = {}
