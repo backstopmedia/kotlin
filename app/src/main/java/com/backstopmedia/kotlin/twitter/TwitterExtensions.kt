@@ -5,7 +5,7 @@ import com.twitter.sdk.android.core.models.Search
 import com.twitter.sdk.android.core.services.SearchService
 import com.twitter.sdk.android.core.services.params.Geocode
 
-fun SearchService.tweets(s: String? = null, geocode: Geocode? = null, s1: String? = null, s2: String? = null,
-                         s3: String? = null,integer: Int? = null, s4: String? = null, aLong: Long? = null,
-                         aLong1: Long? = null, aBoolean: Boolean? = null, callback: Callback<Search>) =
-        tweets(s, geocode, s1, s2, s3, integer, s4, aLong, aLong1, aBoolean, callback)
+fun SearchService.tweets(query: String? = null, geocode: Geocode? = null, lang: String? = null, locale: String? = null,
+                         resultType: String? = null, count: Int? = null, until: String? = null, sinceId: Long? = null,
+                         maxId: Long? = null, includeEntities: Boolean? = null, callback: Callback<Search>) =
+        tweets(query, geocode, lang, locale, resultType, count, until, sinceId, maxId, includeEntities, callback)
