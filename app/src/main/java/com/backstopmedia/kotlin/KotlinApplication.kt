@@ -17,10 +17,10 @@ class KotlinApplication : Application() {
         Fabric.with(this, Twitter(TwitterAuthConfig(MyTwitter.KEY, MyTwitter.SECRET)))
 
         // All hail kallbacks.
-        Twitter.getInstance().core.logInGuest(kallback {
-            Twitter.getApiClient().searchService.tweets("Kotlin", callback = kallback {
-                Toast.makeText(this, "Found ${it.data.tweets.size()} tweets.", Toast.LENGTH_LONG).show()
-            })
-        })
+//        Twitter.getInstance().core.logInGuest(kallback {
+//            Twitter.getApiClient().searchService.tweets("Kotlin", callback = kallback {
+//                Toast.makeText(this, "Found ${it.data.tweets.size()} tweets.", Toast.LENGTH_LONG).show()
+//            })
+//        })
     }
 }

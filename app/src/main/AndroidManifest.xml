@@ -17,12 +17,17 @@
             android:value="066f172c06fc89ed95e0cbc54d57a330d03ec999" />
 
         <activity android:name=".hello.JavaHelloActivity"/>
-        <activity android:name=".hello.KotlinHelloActivity">
+        <activity android:name=".hello.KotlinHelloActivity"/>
+
+        <activity android:name=".twitter.ui.LandingActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+        <activity android:name=".twitter.ui.TimelineActivity"/>
+        <activity android:name=".twitter.ui.LoginActivity"/>
 
     </application>
 
