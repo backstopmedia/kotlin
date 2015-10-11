@@ -1,24 +1,40 @@
 package com.backstopmedia.kotlin.twitter
 
 import android.util.Log
-import android.widget.Toast
 import com.twitter.sdk.android.core.Callback
 import com.twitter.sdk.android.core.Result
 import com.twitter.sdk.android.core.TwitterException
 
+/**
+ * A convenience method for generating callbacks.
+ *
+ * @param onSuccess block to call on successful return
+ * @return A [Callback] object with basic error logging.
+ */
 fun <T: Any> kallback(onSuccess: (Result<T>) -> Unit = {}): Kallback<T> {
     return Kallback(onSuccess).onFail {
         Log.e("kallback", "Something went wrong: $it")
     }
 }
 
-open class Kallback<T: Any>(success: (Result<T>) -> Unit) : Callback<T>() {
+/**
+ * A streamlined subclass of [Callback] with optional failure behavior.
+ *
+ * @param T the response type, passed up to [Callback]
+ * @param onSuccess block to call on successful return
+ * @see onFail for optional fail block.
+ */
+open class Kallback<T: Any>(private val onSuccess: (Result<T>) -> Unit) : Callback<T>() {
 
-    private val onSuccess: (Result<T>) -> Unit = success
     private var onFail: ((TwitterException) -> Unit)? = null
 
-    fun onFail(fn: (TwitterException) -> Unit): Kallback<T> {
-        onFail = fn
+    /**
+     * Sets failure behavior. Can be chained from [kallback] or constructor.
+     *
+     * @param onFail block to run on failed request.
+     */
+    fun onFail(onFail: (TwitterException) -> Unit): Kallback<T> {
+        this.onFail = onFail
         return this
     }
 
