@@ -15,7 +15,7 @@ fun <T: Any> kallback(onSuccess: (Result<T>) -> Unit = {}): Kallback<T> {
 open class Kallback<T: Any>(success: (Result<T>) -> Unit) : Callback<T>() {
 
     private val onSuccess: (Result<T>) -> Unit = success
-    private var onFail: (TwitterException) -> Unit = {}
+    private var onFail: ((TwitterException) -> Unit)? = null
 
     fun onFail(fn: (TwitterException) -> Unit): Kallback<T> {
         onFail = fn
@@ -27,6 +27,6 @@ open class Kallback<T: Any>(success: (Result<T>) -> Unit) : Callback<T>() {
     }
 
     override fun failure(exception: TwitterException) {
-        onFail.invoke(exception)
+        onFail?.invoke(exception)
     }
 }
