@@ -1,6 +1,8 @@
 package com.backstopmedia.kotlin.twitter
 
+import android.app.Activity
 import android.util.Log
+import android.widget.Toast
 import com.twitter.sdk.android.core.Callback
 import com.twitter.sdk.android.core.Result
 import com.twitter.sdk.android.core.TwitterException
@@ -13,7 +15,23 @@ import com.twitter.sdk.android.core.TwitterException
  */
 fun <T: Any> kallback(onSuccess: (Result<T>) -> Unit = {}): Kallback<T> {
     return Kallback(onSuccess).onFail {
-        Log.e("kallback", "Something went wrong: $it")
+        Log.w("kallback", "Something went wrong: $it")
+    }
+}
+
+/**
+ * Specialization of [kallback]
+ *
+ * This version, since it has access to the calling Context,
+ * is able to pop up a toast on error states.
+ *
+ * @param onSuccess block to call on successful return
+ * @return A [Callback] object with basic error logging.
+ */
+fun <T: Any> Activity.kallback(onSuccess: (Result<T>) -> Unit = {}): Kallback<T> {
+    return Kallback(onSuccess).onFail {
+        Log.w("kallback", "Something went wrong: $it")
+        Toast.makeText(this, "Something went wrong: ${it.getMessage()}", Toast.LENGTH_LONG).show()
     }
 }
 
