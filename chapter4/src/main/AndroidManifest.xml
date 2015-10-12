@@ -7,11 +7,19 @@
         android:label="@string/app_name"
         android:icon="@mipmap/ic_launcher"
         android:supportsRtl="true"
+        android:name=".KotlinApplication"
         android:theme="@style/AppTheme">
 
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="066f172c06fc89ed95e0cbc54d57a330d03ec999" />
+
+        <activity android:name=".LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
 
     </application>
 

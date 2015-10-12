@@ -1,12 +1,21 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-android-extensions:$kotlin_version"
+    }
+}
+
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.1"
 
     defaultConfig {
-        applicationId "com.backstopmedia.kotlin.chapter5"
+        applicationId "com.backstopmedia.kotlin.chapter4"
         minSdkVersion 16
         targetSdkVersion 23
         versionCode 1
