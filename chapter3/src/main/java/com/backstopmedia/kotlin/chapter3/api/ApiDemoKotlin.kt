@@ -1,9 +1,8 @@
-package com.backstopmedia.kotlin.twitter.apidemo
+package com.backstopmedia.kotlin.chapter3.api
 
 import android.util.Log
-import android.widget.Toast
-import com.backstopmedia.kotlin.twitter.kallback
-import com.backstopmedia.kotlin.twitter.tweets
+import com.backstopmedia.kotlin.chapter3.twitter.kallback
+import com.backstopmedia.kotlin.chapter3.twitter.tweets
 import com.twitter.sdk.android.Twitter
 
 /**
@@ -13,7 +12,6 @@ import com.twitter.sdk.android.Twitter
 object ApiDemoKotlin {
 
     fun basicSearch() {
-        // All hail kallbacks.
         Twitter.getInstance().core.logInGuest(kallback {
             Twitter.getApiClient().searchService.tweets("Kotlin", callback = kallback {
                 Log.i("ApiDemoKotlin", "Found ${it.data.tweets.size()} tweets.")

@@ -1,4 +1,4 @@
-package com.backstopmedia.kotlin.twitter.apidemo;
+package com.backstopmedia.kotlin.chapter3.api;
 
 import android.util.Log;
 
