@@ -1,9 +1,38 @@
 package com.backstopmedia.kotlin.twitter
 
+import com.twitter.sdk.android.Twitter
 import com.twitter.sdk.android.core.Callback
+import com.twitter.sdk.android.core.TwitterApiClient
+import com.twitter.sdk.android.core.TwitterCore
 import com.twitter.sdk.android.core.models.Search
 import com.twitter.sdk.android.core.services.SearchService
 import com.twitter.sdk.android.core.services.params.Geocode
+import com.twitter.sdk.android.tweetcomposer.TweetComposer
+import com.twitter.sdk.android.tweetui.TweetUi
+
+/**
+ * Accessor to Kit for authenticated requests to Twitter API
+ */
+val twitterCore: TwitterCore
+    get() = Twitter.getInstance().core
+
+/**
+ * Accessor to Kit for composing tweets
+ */
+val tweetComposer: TweetComposer
+    get() = Twitter.getInstance().tweetComposer
+
+/**
+ * Accessor to Kit for rendering tweets
+ */
+val tweetUi: TweetUi
+    get() = Twitter.getInstance().tweetUi
+
+/**
+ * Accessor to Twitter Api Client
+ */
+val twitterApiClient: TwitterApiClient
+    get() = Twitter.getApiClient()
 
 /**
  * Extension function for tweets method on [SearchService]
