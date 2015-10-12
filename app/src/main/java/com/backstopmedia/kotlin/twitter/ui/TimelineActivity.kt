@@ -6,11 +6,12 @@ import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ListView
-import butterknife.bindView
 import com.backstopmedia.kotlin.R
 import com.twitter.sdk.android.Twitter
 import com.twitter.sdk.android.tweetui.TweetTimelineListAdapter
 import com.twitter.sdk.android.tweetui.UserTimeline
+
+import kotlinx.android.synthetic.activity_timeline.*
 
 
 /**
@@ -18,8 +19,6 @@ import com.twitter.sdk.android.tweetui.UserTimeline
  * Copyright(c) 2015 Level, Inc.
  */
 class TimelineActivity : AppCompatActivity() {
-
-    val list: ListView by bindView(android.R.id.list)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
