@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.backstopmedia.kotlin.chapter5">
+    package="com.backstopmedia.kotlin.chapter4">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
