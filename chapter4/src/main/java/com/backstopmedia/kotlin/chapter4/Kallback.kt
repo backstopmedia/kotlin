@@ -6,6 +6,9 @@ import android.widget.Toast
 import com.twitter.sdk.android.core.Callback
 import com.twitter.sdk.android.core.Result
 import com.twitter.sdk.android.core.TwitterException
+import com.twitter.sdk.android.core.TwitterSession
+
+private const val TAG = "Kallback"
 
 /**
  * A convenience method for generating callbacks.
@@ -13,9 +16,9 @@ import com.twitter.sdk.android.core.TwitterException
  * @param onSuccess block to call on successful return
  * @return A [Callback] object with basic error logging.
  */
-fun <T: Any> kallback(onSuccess: (Result<T>) -> Unit = {}): Kallback<T> {
+fun <T> kallback(onSuccess: (Result<T>) -> Unit = {}): Kallback<T> {
     return Kallback(onSuccess).onFail {
-        Log.w("kallback", "Something went wrong: $it")
+        Log.w(TAG, "Something went wrong: $it")
     }
 }
 
@@ -28,9 +31,9 @@ fun <T: Any> kallback(onSuccess: (Result<T>) -> Unit = {}): Kallback<T> {
  * @param onSuccess block to call on successful return
  * @return A [Callback] object with basic error logging.
  */
-fun <T: Any> Activity.kallback(onSuccess: (Result<T>) -> Unit = {}): Kallback<T> {
+fun <T> Activity.kallback(onSuccess: (Result<T>) -> Unit = {}): Kallback<T> {
     return Kallback(onSuccess).onFail {
-        Log.w("kallback", "Something went wrong: $it")
+        Log.w(TAG, "Something went wrong: $it")
         Toast.makeText(this, "Something went wrong: ${it.getMessage()}", Toast.LENGTH_LONG).show()
     }
 }
@@ -42,7 +45,7 @@ fun <T: Any> Activity.kallback(onSuccess: (Result<T>) -> Unit = {}): Kallback<T>
  * @param onSuccess block to call on successful return
  * @see onFail for optional fail block.
  */
-open class Kallback<T: Any>(private val onSuccess: (Result<T>) -> Unit) : Callback<T>() {
+open class Kallback<T>(private val onSuccess: (Result<T>) -> Unit) : Callback<T>() {
 
     private var onFail: ((TwitterException) -> Unit)? = null
 
@@ -57,7 +60,7 @@ open class Kallback<T: Any>(private val onSuccess: (Result<T>) -> Unit) : Callba
     }
 
     override fun success(result: Result<T>) {
-        onSuccess.invoke(result)
+        onSuccess(result)
     }
 
     override fun failure(exception: TwitterException) {
