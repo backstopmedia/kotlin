@@ -11,7 +11,4 @@ class KotlinApplication : Application() {
         super.onCreate()
         Fabric.with(this, Twitter(TwitterAuthConfig(MyTwitter.KEY, MyTwitter.SECRET)))
     }
-
-    fun testApi() {
-    }
 }
