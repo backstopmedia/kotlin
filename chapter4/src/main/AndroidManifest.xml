@@ -1,25 +1,43 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.backstopmedia.kotlin.chapter4">
+<manifest
+    package="com.backstopmedia.kotlin.chapter4"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
-    <application android:allowBackup="true"
-        android:label="@string/app_name"
-        android:icon="@mipmap/ic_launcher"
-        android:supportsRtl="true"
+    <application
         android:name=".KotlinApplication"
+        android:allowBackup="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="066f172c06fc89ed95e0cbc54d57a330d03ec999" />
 
-        <activity android:name=".LoginActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".LoginActivity"
+            android:label="@string/ktwitter" />
+
+        <activity
+            android:name=".TimelineActivity"
+            android:label="@string/navigation_view.timeline" />
+
+        <activity
+            android:name=".TopArticlesActivity"
+            android:label="@string/navigation_view.top_articles" />
+
+        <activity
+            android:name=".TopImagesActivity"
+            android:label="@string/navigation_view.top_images" />
 
     </application>
 
