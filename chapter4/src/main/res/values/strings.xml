@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Chapter 4</string>
+
+    <string name="navigation_view.timeline">Timeline</string>
+    <string name="navigation_view.top_articles">Top Articles</string>
+    <string name="navigation_view.top_images">Top Images</string>
+    <string name="ktwitter">KTwitter</string>
+    <string name="no_tweets">No Tweets</string>
+
 </resources>
