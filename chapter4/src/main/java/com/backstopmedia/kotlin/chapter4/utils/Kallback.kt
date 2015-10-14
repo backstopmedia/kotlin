@@ -1,4 +1,4 @@
-package com.backstopmedia.kotlin.chapter4
+package com.backstopmedia.kotlin.chapter4.utils
 
 import android.app.Activity
 import android.util.Log
@@ -13,7 +13,7 @@ import com.twitter.sdk.android.core.TwitterException
  * @param onSuccess block to call on successful return
  * @return A [Callback] object with basic error logging.
  */
-fun <T: Any> kallback(onSuccess: (Result<T>) -> Unit = {}): Kallback<T> {
+fun <T : Any> kallback(onSuccess: (Result<T>) -> Unit = {}): Kallback<T> {
     return Kallback(onSuccess).onFail {
         Log.w("kallback", "Something went wrong: $it")
     }
@@ -28,7 +28,7 @@ fun <T: Any> kallback(onSuccess: (Result<T>) -> Unit = {}): Kallback<T> {
  * @param onSuccess block to call on successful return
  * @return A [Callback] object with basic error logging.
  */
-fun <T: Any> Activity.kallback(onSuccess: (Result<T>) -> Unit = {}): Kallback<T> {
+fun <T : Any> Activity.kallback(onSuccess: (Result<T>) -> Unit = {}): Kallback<T> {
     return Kallback(onSuccess).onFail {
         Log.w("kallback", "Something went wrong: $it")
         Toast.makeText(this, "Something went wrong: ${it.getMessage()}", Toast.LENGTH_LONG).show()
@@ -42,7 +42,7 @@ fun <T: Any> Activity.kallback(onSuccess: (Result<T>) -> Unit = {}): Kallback<T>
  * @param onSuccess block to call on successful return
  * @see onFail for optional fail block.
  */
-open class Kallback<T: Any>(private val onSuccess: (Result<T>) -> Unit) : Callback<T>() {
+open class Kallback<T : Any>(private val onSuccess: (Result<T>) -> Unit) : Callback<T>() {
 
     private var onFail: ((TwitterException) -> Unit)? = null
 

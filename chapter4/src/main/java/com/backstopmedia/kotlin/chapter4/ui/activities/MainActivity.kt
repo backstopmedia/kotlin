@@ -1,4 +1,4 @@
-package com.backstopmedia.kotlin.chapter4
+package com.backstopmedia.kotlin.chapter4.ui.activities
 
 import android.content.Intent
 import android.os.Bundle

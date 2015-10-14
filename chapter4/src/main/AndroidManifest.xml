@@ -16,7 +16,7 @@
             android:name="io.fabric.ApiKey"
             android:value="066f172c06fc89ed95e0cbc54d57a330d03ec999" />
 
-        <activity android:name=".MainActivity">
+        <activity android:name=".ui.activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -24,19 +24,15 @@
         </activity>
 
         <activity
-            android:name=".LoginActivity"
+            android:name=".ui.activities.LoginActivity"
             android:label="@string/ktwitter" />
 
         <activity
-            android:name=".TimelineActivity"
+            android:name=".ui.activities.TimelineActivity"
             android:label="@string/navigation_view.timeline" />
 
         <activity
-            android:name=".TopArticlesActivity"
-            android:label="@string/navigation_view.top_articles" />
-
-        <activity
-            android:name=".TopImagesActivity"
+            android:name=".ui.activities.TopImagesActivity"
             android:label="@string/navigation_view.top_images" />
 
     </application>

@@ -7,11 +7,6 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/drawer_top_articles"
-            android:icon="@drawable/ic_collections_bookmark_black_24dp"
-            android:title="@string/navigation_view.top_articles" />
-
-        <item
             android:id="@+id/drawer_top_images"
             android:icon="@drawable/ic_collections_black_24dp"
             android:title="@string/navigation_view.top_images" />

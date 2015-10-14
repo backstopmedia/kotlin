@@ -1,4 +1,4 @@
-package com.backstopmedia.kotlin.chapter4
+package com.backstopmedia.kotlin.chapter4.ui
 
 import android.content.Intent
 import android.os.Bundle
@@ -15,13 +15,25 @@ import android.view.MenuItem
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import com.backstopmedia.kotlin.chapter4.R
+import com.backstopmedia.kotlin.chapter4.entities.Profile
+import com.backstopmedia.kotlin.chapter4.interactors.UserInteractor
+import com.backstopmedia.kotlin.chapter4.interactors.UserInteractorImpl
+import com.backstopmedia.kotlin.chapter4.presenters.NavigationDrawerPresenter
+import com.backstopmedia.kotlin.chapter4.presenters.NavigationDrawerPresenterImpl
+import com.backstopmedia.kotlin.chapter4.ui.activities.TimelineActivity
+import com.backstopmedia.kotlin.chapter4.ui.activities.TopImagesActivity
+import com.backstopmedia.kotlin.chapter4.ui.view.NavigationDrawerView
+import com.backstopmedia.kotlin.chapter4.utils.glide.CircleTransformation
+import com.bumptech.glide.Glide
+import com.twitter.sdk.android.core.TwitterCore
 import org.jetbrains.anko.find
 import kotlin.properties.Delegates
 
 /**
  * Created by Tudor Luca on 13/10/15.
  */
-class NavigationHelper : Fragment() {
+class NavigationHelper : Fragment(), NavigationDrawerView {
 
     companion object {
         fun setup(activity: AppCompatActivity, @LayoutRes resId: Int): NavigationHelper {
@@ -31,19 +43,23 @@ class NavigationHelper : Fragment() {
         }
     }
 
+    private val interactor: UserInteractor by lazy { UserInteractorImpl(TwitterCore.getInstance().sessionManager.activeSession) }
+    private val presenter: NavigationDrawerPresenter  by lazy { NavigationDrawerPresenterImpl(interactor) }
+
     private var isSubdecorInstalled = false
     private var drawerLayout: DrawerLayout by Delegates.notNull()
     private var drawerToggle: ActionBarDrawerToggle by Delegates.notNull()
     private var navigationView: NavigationView by Delegates.notNull()
     private var content: ViewGroup by Delegates.notNull()
-
     private var username: TextView by Delegates.notNull()
     private var avatar: ImageView by Delegates.notNull()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setupNavigationView()
         setHasOptionsMenu(true)
+        presenter.takeView(this)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -56,9 +72,22 @@ class NavigationHelper : Fragment() {
         drawerToggle.syncState()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        presenter.dropView(this)
+    }
+
     override fun onOptionsItemSelected(item: MenuItem?): Boolean = when (drawerToggle.onOptionsItemSelected(item)) {
         true -> true
         else -> super.onOptionsItemSelected(item)
+    }
+
+    override fun bind(userProfile: Profile) {
+        username.text = userProfile.handle
+        Glide.with(activity)
+                .load(userProfile.avatarUrl)
+                .transform(CircleTransformation(activity))
+                .into(avatar)
     }
 
     private fun setupNavigationView() {
@@ -67,9 +96,6 @@ class NavigationHelper : Fragment() {
                 R.id.drawer_timeline ->
                     if (activity is TimelineActivity) null
                     else Intent(activity, TimelineActivity::class.java)
-                R.id.drawer_top_articles ->
-                    if (activity is TopArticlesActivity) null
-                    else Intent(activity, TopArticlesActivity::class.java)
                 R.id.drawer_top_images ->
                     if (activity is TopImagesActivity) null
                     else Intent(activity, TopImagesActivity::class.java)
@@ -143,4 +169,4 @@ fun AppCompatActivity.setupSimpleToolbar(@IdRes toolbarId: Int): Toolbar {
     return toolbar
 }
 
-private val FRAG_TAG: String = "NavigationHelper"
+private const val FRAG_TAG: String = "NavigationHelper"

@@ -1,7 +1,9 @@
-package com.backstopmedia.kotlin.chapter4
+package com.backstopmedia.kotlin.chapter4.ui.activities
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import com.backstopmedia.kotlin.chapter4.R
+import com.backstopmedia.kotlin.chapter4.ui.NavigationHelper
 import com.twitter.sdk.android.tweetui.TweetTimelineListAdapter
 import com.twitter.sdk.android.tweetui.UserTimeline
 import kotlinx.android.synthetic.activity_timeline.empty
