@@ -28,5 +28,4 @@ class NavigationDrawerPresenterImpl(val interactor: UserInteractor) : Navigation
     override fun dropView(view: NavigationDrawerView) {
         compositeSubscription.unsubscribe()
     }
-
 }
