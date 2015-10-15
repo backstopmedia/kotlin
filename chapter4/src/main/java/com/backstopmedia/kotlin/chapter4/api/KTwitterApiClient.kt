@@ -1,5 +1,6 @@
 package com.backstopmedia.kotlin.chapter4.api
 
+import com.twitter.sdk.android.Twitter
 import com.twitter.sdk.android.core.TwitterApiClient
 import com.twitter.sdk.android.core.TwitterSession
 import com.twitter.sdk.android.core.models.Tweet
@@ -8,9 +9,6 @@ import retrofit.http.GET
 import retrofit.http.Query
 import rx.Observable
 
-/**
- * Created by Tudor Luca on 14/10/15.
- */
 class KTwitterApiClient(val session: TwitterSession) : TwitterApiClient(session) {
 
     val kTwitterApi: KTwitterApi by lazy { getService(KTwitterApi::class.java) }

@@ -5,14 +5,10 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.twitter.sdk.android.core.TwitterCore
 
-/**
- * Created by Tudor Luca on 14/10/15.
- */
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         when (TwitterCore.getInstance()?.sessionManager?.activeSession) {
             null -> goToLogin()
             else -> goToTimeline()

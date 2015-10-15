@@ -7,7 +7,7 @@ import com.twitter.sdk.android.core.Callback
 import com.twitter.sdk.android.core.Result
 import com.twitter.sdk.android.core.TwitterException
 
-private const val TAG = "Kallback"
+private val TAG = "Kallback"
 
 /**
  * A convenience method for generating callbacks.
