@@ -13,11 +13,6 @@ import com.twitter.sdk.android.tweetui.UserTimeline
 
 import kotlinx.android.synthetic.activity_timeline.*
 
-
-/**
- * Created by Aaron Sarazan on 10/11/15.
- * Copyright(c) 2015 Level, Inc.
- */
 class TimelineActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

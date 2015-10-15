@@ -8,10 +8,6 @@ import com.backstopmedia.kotlin.chapter4.R
 import com.backstopmedia.kotlin.chapter4.utils.kallback
 import kotlinx.android.synthetic.activity_login.login
 
-/**
- * Created by Aaron Sarazan on 10/11/15.
- * Copyright(c) 2015 Level, Inc.
- */
 class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
