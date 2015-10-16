@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
 import com.backstopmedia.kotlin.R
 import com.backstopmedia.kotlin.twitter.kallback
+import com.backstopmedia.kotlin.util.ui.startActivity
 import com.backstopmedia.kotlin.util.ui.toast
 import kotlinx.android.synthetic.activity_login.*
 
@@ -16,8 +17,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
         login.callback = kallback {
             toast("Logged in as ${it.data.userName}")
-            startActivity(Intent(this, LandingActivity::class.java))
-            finish()
+            startActivity(LandingActivity::class.java)
         }
     }
 
