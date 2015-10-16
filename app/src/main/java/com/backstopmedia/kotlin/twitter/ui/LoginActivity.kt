@@ -15,10 +15,11 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        login.callback = kallback {
-            toast("Logged in as ${it.data.userName}")
-            startActivity(LandingActivity::class.java)
-        }
+login.callback = kallback {
+    toast("Logged in as ${it.data.userName}")
+    startActivity(LandingActivity::class.java)
+    finish()
+}
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
