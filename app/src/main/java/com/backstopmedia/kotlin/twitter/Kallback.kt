@@ -1,8 +1,10 @@
 package com.backstopmedia.kotlin.twitter
 
 import android.app.Activity
+import android.content.Context
 import android.util.Log
 import android.widget.Toast
+import com.backstopmedia.kotlin.util.ui.toast
 import com.twitter.sdk.android.core.Callback
 import com.twitter.sdk.android.core.Result
 import com.twitter.sdk.android.core.TwitterException
@@ -28,10 +30,10 @@ fun <T: Any> kallback(onSuccess: (Result<T>) -> Unit = {}): Kallback<T> {
  * @param onSuccess block to call on successful return
  * @return A [Callback] object with basic error logging.
  */
-fun <T: Any> Activity.kallback(onSuccess: (Result<T>) -> Unit = {}): Kallback<T> {
+fun <T: Any> Context.kallback(onSuccess: (Result<T>) -> Unit = {}): Kallback<T> {
     return Kallback(onSuccess).onFail {
         Log.w("kallback", "Something went wrong: $it")
-        Toast.makeText(this, "Something went wrong: ${it.getMessage()}", Toast.LENGTH_LONG).show()
+        toast("Something went wrong: ${it.getMessage()}")
     }
 }
 
