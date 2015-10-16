@@ -1,0 +1,14 @@
+<resources>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="margin_normal">16dp</dimen>
+
+    <dimen name="status_bar_height">25dp</dimen>
+
+    <dimen name="avatar_size">64dp</dimen>
+
+    <dimen name="keyline_0.5">8dp</dimen>
+    <dimen name="keyline_1">16dp</dimen>
+    <dimen name="keyline_2">72dp</dimen>
+
+</resources>

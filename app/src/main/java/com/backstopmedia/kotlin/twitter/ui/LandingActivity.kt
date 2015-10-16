@@ -5,11 +5,6 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.twitter.sdk.android.Twitter
 
-
-/**
- * Created by Aaron Sarazan on 10/11/15.
- * Copyright(c) 2015 Level, Inc.
- */
 class LandingActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
