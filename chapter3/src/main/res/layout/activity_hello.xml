@@ -11,7 +11,7 @@
         android:id="@+id/text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/press_the_button"/>
+        android:text="@string/prompt"/>
 
     <EditText
         android:id="@+id/editText"
@@ -26,6 +26,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:text="@string/press_me"/>
+        android:text="@string/label"/>
 
 </RelativeLayout>
