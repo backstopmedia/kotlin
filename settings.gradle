@@ -1,1 +1,2 @@
 include ':app', ':chapter3', ':chapter4'
+include 'chapter7' // Functional Programming
