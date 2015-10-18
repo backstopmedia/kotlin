@@ -4,6 +4,33 @@ import org.junit.Test
 
 class SequenceTest {
 
+    @Test fun createSequenceOfArray() {
+        val seq = arrayOf(1,2,3).asSequence()
+    }
+
+    @Test fun createSequenceOfList() {
+        val seq = listOf(1,2,3).asSequence()
+    }
+
+    @Test fun createSequenceOfValues() {
+        val seq = sequenceOf(1,2,3)
+    }
+
+    @Test fun createSequenceOfProgression() {
+        val seq = sequenceOf(1..10)
+        seq.printElements()
+    }
+
+    @Test fun createSequenceByFunction() {
+        var i = 0
+        val seq = sequence { ++i }
+    }
+
+    @Test fun createSequenceBy() {
+        var i = 0
+        val seq = sequence(i) {++i + it }
+    }
+
     @Test fun map() {
         val seq = sequenceOf(1, 2, 3).map { it * 2 }
         seq.printElements()
