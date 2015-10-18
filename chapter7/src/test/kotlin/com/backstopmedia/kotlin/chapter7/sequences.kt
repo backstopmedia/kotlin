@@ -5,15 +5,15 @@ import org.junit.Test
 class SequenceTest {
 
     @Test fun createSequenceOfArray() {
-        val seq = arrayOf(1,2,3).asSequence()
+        val seq = arrayOf(1, 2, 3).asSequence()
     }
 
     @Test fun createSequenceOfList() {
-        val seq = listOf(1,2,3).asSequence()
+        val seq = listOf(1, 2, 3).asSequence()
     }
 
     @Test fun createSequenceOfValues() {
-        val seq = sequenceOf(1,2,3)
+        val seq = sequenceOf(1, 2, 3)
     }
 
     @Test fun createSequenceOfProgression() {
@@ -28,11 +28,16 @@ class SequenceTest {
 
     @Test fun createSequenceBy() {
         var i = 0
-        val seq = sequence(i) {++i + it }
+        val seq = sequence(i) { ++i + it }
     }
 
     @Test fun map() {
         val seq = sequenceOf(1, 2, 3).map { it * 2 }
+        seq.printElements()
+    }
+
+    @Test fun filter() {
+        val seq = sequenceOf(1, 2, 3, 4, 5, 6).filter { it and 1 == 0 }
         seq.printElements()
     }
 
