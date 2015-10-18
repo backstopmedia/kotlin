@@ -40,8 +40,6 @@ class SequenceTest {
         val seq = sequenceOf(1, 2, 1).distinct()
         seq.printElements()
     }
-
-
 }
 
 
