@@ -2,6 +2,7 @@ package com.backstopmedia.kotlin.chapter7
 
 import org.junit.Test
 
+@Suppress("UNUSED_VARIABLE")
 class VariousTest {
 
     @Test fun letFn() {

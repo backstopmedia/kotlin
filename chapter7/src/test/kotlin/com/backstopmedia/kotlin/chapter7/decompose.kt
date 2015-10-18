@@ -2,6 +2,7 @@ package com.backstopmedia.kotlin.chapter7
 
 import org.junit.Test
 
+@Suppress("UNUSED_VARIABLE")
 class DecomposeTest {
     @Test fun decomposeClass() {
         class Person(val name: String, val age: Int) {
