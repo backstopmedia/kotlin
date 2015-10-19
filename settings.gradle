@@ -1,2 +1,2 @@
-include ':app', ':chapter3', ':chapter4'
+include ':chapter3', ':twitter-app'
 include 'chapter7' // Functional Programming
