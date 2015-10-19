@@ -1,14 +1,13 @@
-package com.backstopmedia.kotlin.twitter.ui
+package com.backstopmedia.kotlin.chapter4.ui.activities
 
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
-import com.backstopmedia.kotlin.R
-import com.backstopmedia.kotlin.twitter.kallback
-import com.backstopmedia.kotlin.util.ui.startActivity
-import com.backstopmedia.kotlin.util.ui.toast
-import kotlinx.android.synthetic.activity_login.*
+import com.backstopmedia.kotlin.chapter4.R
+import com.backstopmedia.kotlin.chapter4.utils.kallback
+import kotlinx.android.synthetic.activity_login.login
+import org.jetbrains.anko.toast
 
 class LoginActivity : AppCompatActivity() {
 
@@ -16,9 +15,9 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         login.callback = kallback {
-            toast("Logged in as ${it.data.userName}")
-            startActivity(LandingActivity::class.java)
             finish()
+            startActivity(Intent(this, TimelineActivity::class.java))
+            toast("Logged in as ${it.data.userName}")
         }
     }
 
