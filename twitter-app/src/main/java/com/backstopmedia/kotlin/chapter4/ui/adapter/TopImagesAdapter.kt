@@ -11,9 +11,6 @@ import kotlinx.android.synthetic.grid_item_top_image.view.retweet
 import org.jetbrains.anko.layoutInflater
 import org.jetbrains.anko.onClick
 
-/**
- * Created by Tudor Luca on 14/10/15.
- */
 class TopImagesAdapter(val images: List<Image>, val onImageClick: (Image) -> Unit) : RecyclerView.Adapter<ViewHolder>() {
 
 

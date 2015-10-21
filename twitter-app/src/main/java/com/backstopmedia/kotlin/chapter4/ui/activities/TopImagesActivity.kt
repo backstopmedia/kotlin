@@ -17,9 +17,6 @@ import com.twitter.sdk.android.core.TwitterCore
 import kotlinx.android.synthetic.activity_top_images.recycler_view
 import org.jetbrains.anko.toast
 
-/**
- * Created by Tudor Luca on 14/10/15.
- */
 class TopImagesActivity : AppCompatActivity(), TopImagesView {
 
     private val interactor: TopImagesInteractor by lazy { TopImagesInteractorImpl(TwitterCore.getInstance().sessionManager.activeSession) }

@@ -8,9 +8,6 @@ import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 import rx.subscriptions.CompositeSubscription
 
-/**
- * Created by Tudor Luca on 14/10/15.
- */
 interface TopImagesPresenter : Presenter<TopImagesView>
 
 class TopImagesPresenterImpl(val interactor: TopImagesInteractor) : TopImagesPresenter {

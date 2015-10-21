@@ -2,16 +2,17 @@ package com.backstopmedia.kotlin.chapter4.ui.activities
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.View
 import com.backstopmedia.kotlin.chapter4.R
 import com.backstopmedia.kotlin.chapter4.ui.NavigationHelper
 import com.twitter.sdk.android.tweetui.TweetTimelineListAdapter
 import com.twitter.sdk.android.tweetui.UserTimeline
 import kotlinx.android.synthetic.activity_timeline.empty
 import kotlinx.android.synthetic.activity_timeline.timeline_list
+import org.jetbrains.anko.alert
+import org.jetbrains.anko.async
+import org.jetbrains.anko.frameLayout
 
-/**
- * Created by Tudor Luca on 14/10/15.
- */
 class TimelineActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,5 +29,9 @@ class TimelineActivity : AppCompatActivity() {
 
         timeline_list.adapter = adapter
         timeline_list.emptyView = empty
+
+        frameLayout {
+            visibility = View.GONE
+        }
     }
 }
