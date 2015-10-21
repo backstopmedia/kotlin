@@ -4,6 +4,27 @@ import org.junit.Test
 
 @Suppress("UNUSED_VARIABLE")
 class PatternMatchingTest {
+
+
+    @Test fun valueMatch() {
+        val x: Any = "hello"
+        when (x) {
+            1 -> println("just 1")
+            "hello" -> println("hello indeed")
+            else -> println("no match]")
+        }
+    }
+
+    @Test fun rangeMatch() {
+        val x = 5
+        when (x) {
+            in 0..4 -> println("0..4")
+            in 5..9 -> println("5..9")
+            else -> println("negative")
+        }
+    }
+
+
     @Test fun typeMatch() {
         val x: Any = "hello"
         when (x) {
