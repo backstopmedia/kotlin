@@ -1,11 +1,11 @@
 <manifest
-    package="com.backstopmedia.kotlin.chapter4"
+    package="com.backstopmedia.kotlin.ktwitter"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name=".KotlinApplication"
+        android:name="com.backstopmedia.kotlin.ktwitter.KotlinApplication"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -16,7 +16,7 @@
             android:name="io.fabric.ApiKey"
             android:value="066f172c06fc89ed95e0cbc54d57a330d03ec999" />
 
-        <activity android:name=".ui.activities.MainActivity">
+        <activity android:name="com.backstopmedia.kotlin.ktwitter.ui.activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -24,15 +24,15 @@
         </activity>
 
         <activity
-            android:name=".ui.activities.LoginActivity"
+            android:name="com.backstopmedia.kotlin.ktwitter.ui.activities.LoginActivity"
             android:label="@string/ktwitter" />
 
         <activity
-            android:name=".ui.activities.TimelineActivity"
+            android:name="com.backstopmedia.kotlin.ktwitter.ui.activities.TimelineActivity"
             android:label="@string/navigation_view.timeline" />
 
         <activity
-            android:name=".ui.activities.TopImagesActivity"
+            android:name="com.backstopmedia.kotlin.ktwitter.ui.activities.TopImagesActivity"
             android:label="@string/navigation_view.top_images" />
 
     </application>
