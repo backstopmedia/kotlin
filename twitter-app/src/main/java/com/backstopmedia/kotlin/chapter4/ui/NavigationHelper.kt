@@ -1,17 +1,20 @@
 package com.backstopmedia.kotlin.chapter4.ui
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.support.annotation.IdRes
 import android.support.annotation.LayoutRes
 import android.support.design.widget.NavigationView
 import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentManager
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.LayoutInflater
 import android.view.MenuItem
+import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
@@ -30,9 +33,6 @@ import com.twitter.sdk.android.core.TwitterCore
 import org.jetbrains.anko.find
 import kotlin.properties.Delegates
 
-/**
- * Created by Tudor Luca on 13/10/15.
- */
 class NavigationHelper : Fragment(), NavigationDrawerView {
 
     companion object {

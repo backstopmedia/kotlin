@@ -6,9 +6,6 @@ import com.backstopmedia.kotlin.chapter4.entities.Profile
 import com.twitter.sdk.android.core.TwitterSession
 import rx.Observable
 
-/**
- * Created by Tudor Luca on 14/10/15.
- */
 interface UserInteractor {
 
     fun getCurrentUser(): Observable<Profile>

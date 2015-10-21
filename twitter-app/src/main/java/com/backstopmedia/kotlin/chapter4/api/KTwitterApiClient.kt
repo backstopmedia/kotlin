@@ -1,6 +1,5 @@
 package com.backstopmedia.kotlin.chapter4.api
 
-import com.twitter.sdk.android.Twitter
 import com.twitter.sdk.android.core.TwitterApiClient
 import com.twitter.sdk.android.core.TwitterSession
 import com.twitter.sdk.android.core.models.Tweet
