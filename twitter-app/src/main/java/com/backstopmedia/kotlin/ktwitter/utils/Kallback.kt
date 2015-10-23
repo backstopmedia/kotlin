@@ -33,7 +33,7 @@ fun <T> kallback(onSuccess: (Result<T>) -> Unit = {}): Kallback<T> {
 fun <T> Activity.kallback(onSuccess: (Result<T>) -> Unit = {}): Kallback<T> {
     return Kallback(onSuccess).onFail {
         Log.w(TAG, "Something went wrong: $it")
-        Toast.makeText(this, "Something went wrong: ${it.getMessage()}", Toast.LENGTH_LONG).show()
+        Toast.makeText(this, "Something went wrong: ${it.message}", Toast.LENGTH_LONG).show()
     }
 }
 

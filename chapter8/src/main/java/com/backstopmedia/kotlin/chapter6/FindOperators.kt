@@ -6,8 +6,6 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.view.View
 import android.view.ViewGroup
-import rx.Subscription
-import rx.subscriptions.CompositeSubscription
 
 /**
  * Created by Aaron Sarazan on 10/19/15
@@ -29,10 +27,7 @@ operator fun rx.subscriptions.CompositeSubscription.plus(other: rx.Subscription)
     add(other)
 }
 
-operator fun rx.Subscription.plusAssign(other: rx.Subscription): rx.subscriptions.CompositeSubscription {
-    return rx.subscriptions.CompositeSubscription(this, other)
-}
-
+@Suppress("UNCHECKED_CAST")
 operator fun <T : View> ViewGroup.get(@IdRes resId: Int): T {
     return findViewById(resId) as T
 }

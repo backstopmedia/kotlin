@@ -7,9 +7,6 @@ import com.twitter.sdk.android.core.TwitterSession
 import com.twitter.sdk.android.core.models.Tweet
 import rx.Observable
 
-/**
- * Created by Tudor Luca on 14/10/15.
- */
 interface TopImagesInteractor {
 
     fun getMostRecentImages(): Observable<List<Image>>

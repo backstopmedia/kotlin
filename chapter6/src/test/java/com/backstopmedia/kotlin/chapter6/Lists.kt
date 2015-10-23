@@ -1,6 +1,5 @@
 package com.backstopmedia.kotlin.chapter6
 
-import android.util.Log
 import org.junit.Test
 
 class Lists {
@@ -40,7 +39,7 @@ class Lists {
      */
     @Test fun operators() {
         val foobar = listOf("foo", "bar")
-        val football = (foobar - "bar" + "tball").join("")
+        val football = (foobar - "bar" + "tball").joinToString("")
         println("We can also turn foobar into $football")
         println("But the original will always be $foobar!")
     }
@@ -51,7 +50,7 @@ class Lists {
      */
     @Test fun fmap() {
         val animals = listOf("walrus", "eel", "giraffe")
-        val lengths = animals.map { it.length() }
+        val lengths = animals.map { it.length }
         println("lengths are $lengths")
     }
 
