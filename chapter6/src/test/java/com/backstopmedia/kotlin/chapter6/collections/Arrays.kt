@@ -1,4 +1,4 @@
-package com.backstopmedia.kotlin.chapter6
+package com.backstopmedia.kotlin.chapter6.collections
 
 import org.junit.Test
 

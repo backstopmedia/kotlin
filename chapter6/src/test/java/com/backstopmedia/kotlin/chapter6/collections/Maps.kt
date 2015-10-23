@@ -1,11 +1,7 @@
-package com.backstopmedia.kotlin.chapter6
+package com.backstopmedia.kotlin.chapter6.collections
 
 import org.junit.Test
 
-/**
- * Created by Aaron Sarazan on 10/22/15
- * Copyright(c) 2015 Level, Inc.
- */
 public class Maps {
 
     /**
