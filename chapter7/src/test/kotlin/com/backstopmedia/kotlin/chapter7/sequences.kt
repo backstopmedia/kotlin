@@ -53,7 +53,7 @@ fun <T> Sequence<T>.printElements() {
     val sb = StringBuilder()
     sb.append("[")
     forEach {
-        if (sb.length() > 1) sb.append(", ")
+        if (sb.length > 1) sb.append(", ")
         sb.append(it)
     }
     sb.append("]")

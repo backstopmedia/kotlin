@@ -23,9 +23,9 @@ class TopImagesAdapter(val images: List<Image>, val onImageClick: (Image) -> Uni
         holder.bind(image = getItem(position))
     }
 
-    override fun getItemCount(): Int = images.size()
+    override fun getItemCount(): Int = images.size
 
-    fun getItem(position: Int) = images.get(position)
+    fun getItem(position: Int) = images[position]
 
 
 }
