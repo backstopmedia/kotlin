@@ -30,10 +30,10 @@ class Arrays {
     /**
      * The primitive array types, such as [LongArray], are technically
      * not subtypes of [Array], but they have the same methods.
-     * This array will be represented as int[] on the JVM.
+     * This array will be represented as long[] on the JVM.
      */
     @Test fun primitives() {
         val longs = longArrayOf(1L, 2L, 3L)
-        println("Long array is ${longs.asList()}")
+        println("Long array is $longs")
     }
 }
