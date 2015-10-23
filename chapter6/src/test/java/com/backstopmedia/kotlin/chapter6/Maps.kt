@@ -18,5 +18,5 @@ public class Maps {
                 2L to "two")
         println("Here's some numbers: $map")
     }
-    
+
 }
