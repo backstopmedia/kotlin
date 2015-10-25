@@ -27,6 +27,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    android {
+        lintOptions {
+            abortOnError false
+        }
+    }
 }
 
 dependencies {
@@ -42,7 +47,7 @@ dependencies {
     compile "org.jetbrains.anko:anko-support-v4:$anko_version"
     compile 'io.reactivex:rxjava:1.0.14'
     compile 'io.reactivex:rxandroid:1.0.1'
-    compile 'io.reactivex:rxkotlin:0.22.14'
+//    compile 'io.reactivex:rxkotlin:0.22.14'
     compile('com.twitter.sdk.android:twitter:1.8.0@aar') {
         transitive = true;
     }

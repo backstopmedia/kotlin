@@ -1,2 +1,5 @@
-include ':chapter3', ':twitter-app', ':chapter6'
-include 'chapter7' // Functional Programming
+include ':chapter3'
+include ':twitter-app'
+include ':chapter6'
+include ':chapter7' // Functional Programming
+include ':chapter8'
