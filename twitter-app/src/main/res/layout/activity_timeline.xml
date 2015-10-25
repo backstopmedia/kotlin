@@ -18,7 +18,7 @@
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|enterAlways"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
     </android.support.design.widget.AppBarLayout>
 
@@ -32,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal|center_vertical"
-            android:text="@string/no_tweets" />
+            android:text="@string/no_tweets"/>
 
         <ListView
             android:id="@+id/timeline_list"
@@ -40,8 +40,16 @@
             android:layout_height="match_parent"
             android:divider="#e1e8ed"
             android:dividerHeight="1dp"
-            android:drawSelectorOnTop="false" />
+            android:drawSelectorOnTop="false"/>
 
     </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_plus"/>
 
 </android.support.design.widget.CoordinatorLayout>
