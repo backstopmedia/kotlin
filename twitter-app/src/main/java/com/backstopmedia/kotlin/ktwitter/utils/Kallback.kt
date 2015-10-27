@@ -53,7 +53,7 @@ open class Kallback<T>(private val onSuccess: (Result<T>) -> Unit) : Callback<T>
      *
      * @param onFail block to run on failed request.
      */
-    fun onFail(onFail: (TwitterException) -> Unit): Kallback<T> {
+    infix fun onFail(onFail: (TwitterException) -> Unit): Kallback<T> {
         this.onFail = onFail
         return this
     }

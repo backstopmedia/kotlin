@@ -1,5 +1,11 @@
 package com.backstopmedia.kotlin.ktwitter.utils.dsl
 
+import android.util.Log
+import android.widget.Toast
+import com.backstopmedia.kotlin.ktwitter.utils.kallback
+import com.twitter.sdk.android.Twitter
+import com.twitter.sdk.android.core.Callback
+import com.twitter.sdk.android.core.Result
 import com.twitter.sdk.android.core.models.*
 
 /**
@@ -8,16 +14,42 @@ import com.twitter.sdk.android.core.models.*
  */
 
 /**
+ * Allows us to build a tweet via DSL, then post it asynchronously using the API service.
+ */
+fun Tweet.post(callback: Callback<Tweet>) {
+    Twitter.getApiClient().statusesService.update(
+            text,
+            inReplyToStatusId,
+            possiblySensitive,
+            coordinates?.latitude,
+            coordinates?.longitude,
+            place?.id,
+            true,
+            false,
+            null,
+            callback)
+}
+
+/**
  * This will allow you to use a block-based DSL syntax for constructing a tweet.
  * It's a really nice alternative to the builder pattern
  * (and is generally even compatible with it, via extensions).
  *
  * @sample
  * tweet {
- *  id = 12345678L
- *  text = "HAY YOU GUYS" 
+ *  text = "HAY YOU GUYS"
  * }
  */
+
+fun tweetAboutHowGreatKotlinBuildersAre() {
+    tweet {
+        text = "Hey I'm tweeting with Kotlin builders!"
+    }.post(kallback<Tweet> {
+        Log.d("Tweets", "Successfully tweeted ${it.data.id}")
+    } onFail {
+        Log.e("Tweets", "That didn't work")
+    })
+}
 
 inline fun tweet(init: TweetBuilder.() -> Unit): Tweet {
     return TweetBuilder().apply(init).build()
