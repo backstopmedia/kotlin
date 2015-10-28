@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Chapter 4</string>
+    <string name="app_name">KTwitter</string>
 
     <string name="navigation_view.timeline">Timeline</string>
     <string name="navigation_view.top_images">Top Images</string>

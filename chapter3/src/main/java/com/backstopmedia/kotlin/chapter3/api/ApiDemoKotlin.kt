@@ -10,7 +10,7 @@ object ApiDemoKotlin {
     fun basicSearch() {
         Twitter.getInstance().core.logInGuest(kallback {
             Twitter.getApiClient().searchService.tweets("Kotlin", callback = kallback {
-                Log.i("ApiDemoKotlin", "Found ${it.data.tweets.size()} tweets.")
+                Log.i("ApiDemoKotlin", "Found ${it.data.tweets.size} tweets.")
             })
         })
     }
