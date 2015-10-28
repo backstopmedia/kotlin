@@ -29,8 +29,18 @@ class PatternMatchingTest {
         val x: Any = "hello"
         when (x) {
             is Int -> println("Int[$x]")
-            is List<*> -> println("List[${x.size()}]")
-            is String -> println("String[${x.length()}]")
+            is List<*> -> println("List[${x.size}]")
+            is String -> println("String[${x.length}]")
+        }
+    }
+
+    @Test fun typeMatchExpression() {
+        val x: Any = "hello"
+        val s = when (x) {
+            is Int -> "Int[$x]"
+            is List<*> -> "List[${x.size}]"
+            is String -> "String[${x.length}]"
+            else -> "Any[$x]"
         }
     }
 
@@ -38,9 +48,9 @@ class PatternMatchingTest {
         val x: Any = "hello"
         when (x) {
             is Int -> println("Int[$x]")
-            is List<*> -> println("List[${x.size()}]")
-            is String -> println("String[${x.length()}]")
-            else -> println("unknown [$x]")
+            is List<*> -> println("List[${x.size}]")
+            is String -> println("String[${x.length}]")
+            else -> println("Any[$x]")
         }
     }
 
@@ -55,9 +65,13 @@ class PatternMatchingTest {
 
 }
 
+@Suppress("UNUSED_PARAMETER")
 sealed class Foo {
     class Bar(value: String) : Foo()
     class Baz(value: Int) : Foo()
 }
+
+
+
 
 
