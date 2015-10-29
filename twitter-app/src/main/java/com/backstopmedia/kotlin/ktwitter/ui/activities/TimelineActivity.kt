@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.text.Editable
 import android.text.InputType
+import android.util.Log
 import android.view.Gravity
 import com.backstopmedia.kotlin.ktwitter.R
 import com.backstopmedia.kotlin.ktwitter.ui.NavigationHelper
@@ -12,11 +13,9 @@ import com.twitter.sdk.android.tweetcomposer.TweetComposer
 import com.twitter.sdk.android.tweetui.TweetTimelineListAdapter
 import com.twitter.sdk.android.tweetui.UserTimeline
 import kotlinx.android.synthetic.activity_timeline.*
-import org.jetbrains.anko.alert
-import org.jetbrains.anko.editText
-import org.jetbrains.anko.onClick
+import org.jetbrains.anko.*
 
-class TimelineActivity : AppCompatActivity() {
+class TimelineActivity : AppCompatActivity(), AnkoLogger {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,13 +51,20 @@ class TimelineActivity : AppCompatActivity() {
     }
 
     private fun composeTweet(pages: Editable) {
+        val text = "I've read ${pages.count} pages of \"Kotlin Book\"! #AndroidDev #Kotlin"
+        val imageUri = Uri.parse("android.resource://$packageName/drawable/kotlin_logo")
         TweetComposer.Builder(this)
-                .text("#AndroidDev with #Kotlin is great. I've read ${pages.count} pages of \"Kotlin Book\"!")
-                .image(Uri.parse("android.resource://$packageName/drawable/kotlin_logo"))
+                .text(text)
+                .image(imageUri)
                 .show()
     }
 
     private val Editable.count: Int
-        get() = if (toString().isEmpty()) 0 else toString().toInt()
+        get() = if (toString().isEmpty()) 0 else try {
+            toString().toInt()
+        } catch(e: NumberFormatException) {
+            warn { "inputType should be set to TYPE_CLASS_NUMBER" }
+            0
+        }
 
 }
