@@ -6,25 +6,41 @@ import org.junit.Test
 class VariousTest {
 
     @Test fun letFn() {
-        val x = Point(1, 2).let { it.x }
+
+        val x = Point(1, 2).let {
+            val p = Point(3,4)
+            it.x + p.x
+        }
+    }
+
+    @Test fun nullableLetFn() {
+
+        val point : Point? = Point(1, 2)
+
+        val x : Int? = point?.let {
+            val p = Point(3,4)
+            it.x + p.x
+        }
     }
 
     @Test fun withFn() {
-        val x = with(Point(1, 2)) { x }
+        val point3D : Point3D = with(Point(1, 2)) {
+            Point3D(x, y, 3)
+        }
+
     }
 
     @Test fun applyFn() {
-        val point = Point(1, 2).apply { x = 3 }
-    }
-
-    @Test fun runFn() {
-        val fn = fun(p: Point) = { p.x = p.x * 2; p }
-
-        val point = Point(1, 2).run(fn)
+        val point : Point = Point(1, 2).apply {
+            val msg = "Point ($x, $y)"
+            println(msg)
+        }
     }
 
 
 }
 
-data class Point(var x: Int, var y: Int)
+data class Point(val x: Int, val y: Int)
+
+data class Point3D(val x: Int, val y: Int, val z: Int)
 
