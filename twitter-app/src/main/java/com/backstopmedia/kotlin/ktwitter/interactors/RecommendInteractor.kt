@@ -9,11 +9,6 @@ import rx.Observable
 import rx.functions.FuncN
 import java.util.*
 
-/**
- * Created by Aaron Sarazan on 11/2/15
- * Copyright(c) 2015 Level, Inc.
- */
-
 interface RecommendInteractor {
 
     /**
