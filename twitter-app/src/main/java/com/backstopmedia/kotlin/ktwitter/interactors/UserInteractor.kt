@@ -11,6 +11,11 @@ import rx.Observable
 
 interface UserInteractor {
     fun getCurrentUser(): Observable<Profile>
+
+    /**
+     * Fetch [userId]'s favorite users, based on their most recently-faved tweets.
+     * @return A sorted list of pairs consisting of a user and their number of faved tweets by [userId]
+     */
     fun getFavoriteUsers(userId: Long, pageSize: Int = 20, cursor: Int = 0): Observable<List<Pair<User, Int>>>
 }
 

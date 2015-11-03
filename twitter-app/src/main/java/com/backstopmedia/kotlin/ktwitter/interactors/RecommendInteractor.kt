@@ -15,6 +15,12 @@ import java.util.*
  */
 
 interface RecommendInteractor {
+
+    /**
+     * Based on your favorite users, fetch their favorite users.
+     * @see [UserInteractor.getFavoriteUsers]
+     * @return A list of transitive user favorites, sorted by popularity.
+     */
     fun getRecommendedUsers(cursor: Int = 0): Observable<List<User>>
 }
 
