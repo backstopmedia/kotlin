@@ -24,4 +24,7 @@ interface KTwitterApi {
 
     @GET("/1.1/users/show.json")
     fun getUser(@Query("screen_name") screenName: String, @Query("include_entities") includeEntities: Boolean = true): Observable<User>
+
+    @GET("/1.1/favorites/list.json")
+    fun faves(@Query("user_id") user: Long, @Query("count") count: Int): Observable<List<Tweet>>
 }
