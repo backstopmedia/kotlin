@@ -1,5 +1,6 @@
 package com.backstopmedia.kotlin.ktwitter.entities
 
+import com.google.gson.annotations.SerializedName
 import com.twitter.sdk.android.core.models.Tweet
 import com.twitter.sdk.android.core.models.User
 
@@ -21,4 +22,32 @@ data class Profile(val handle: String, val avatarUrl: String) {
             Profile(handle = "@$screenName", avatarUrl = profileImageUrl.replace("_normal", ""))
         }
     }
+}
+
+data class RankedUser(val user: User, val tweets: List<Tweet>, val rank: Int) {
+
+    companion object {
+
+        /**
+         * Retweets are worth twice as much as faves.
+         */
+        fun fromRetweets(user: User, tweets: List<Tweet>): RankedUser {
+            return RankedUser(user, tweets, tweets.size * 2)
+        }
+
+        /**
+         * Faves are okay too, I guess.
+         */
+        fun fromFaves(user: User, tweets: List<Tweet>): RankedUser {
+            return RankedUser(user, tweets, tweets.size)
+        }
+    }
+}
+
+open class UserIdList {
+
+    @JvmField
+    @SerializedName("ids")
+    var ids: List<Long> = listOf()
+
 }

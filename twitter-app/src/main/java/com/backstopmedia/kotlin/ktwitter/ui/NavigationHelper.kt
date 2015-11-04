@@ -10,6 +10,7 @@ import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.ViewGroup
@@ -17,6 +18,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.backstopmedia.kotlin.ktwitter.R
 import com.backstopmedia.kotlin.ktwitter.entities.Profile
+import com.backstopmedia.kotlin.ktwitter.entities.RankedUser
+import com.backstopmedia.kotlin.ktwitter.interactors.TopUsersInteractorImpl
 import com.backstopmedia.kotlin.ktwitter.interactors.UserInteractor
 import com.backstopmedia.kotlin.ktwitter.interactors.UserInteractorImpl
 import com.backstopmedia.kotlin.ktwitter.presenters.NavigationDrawerPresenter
@@ -24,10 +27,14 @@ import com.backstopmedia.kotlin.ktwitter.presenters.NavigationDrawerPresenterImp
 import com.backstopmedia.kotlin.ktwitter.ui.activities.TimelineActivity
 import com.backstopmedia.kotlin.ktwitter.ui.activities.TopImagesActivity
 import com.backstopmedia.kotlin.ktwitter.ui.view.NavigationDrawerView
+import com.backstopmedia.kotlin.ktwitter.utils.functional.toMultimapBy
 import com.backstopmedia.kotlin.ktwitter.utils.glide.CircleTransformation
 import com.bumptech.glide.Glide
+import com.twitter.sdk.android.Twitter
 import com.twitter.sdk.android.core.TwitterCore
 import org.jetbrains.anko.find
+import rx.android.schedulers.AndroidSchedulers
+import rx.schedulers.Schedulers
 import kotlin.properties.Delegates
 
 class NavigationHelper : Fragment(), NavigationDrawerView {
@@ -89,6 +96,17 @@ class NavigationHelper : Fragment(), NavigationDrawerView {
 
     private fun setupNavigationView() {
         navigationView.setNavigationItemSelectedListener {
+            if (it.itemId == R.id.drawer_recommend) {
+                Twitter.getSessionManager().activeSession.let {
+                    TopUsersInteractorImpl(it).getTopUsers(it.userId)
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribeOn(Schedulers.io())
+                            .subscribe {
+                                val log = it.map { "${it.user.screenName} (${it.rank})" }
+                                Log.d("Recommend", log.toString())
+                            }
+                }
+            }
             val intent = when (it.itemId) {
                 R.id.drawer_timeline ->
                     if (activity is TimelineActivity) null
