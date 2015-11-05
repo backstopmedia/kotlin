@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?selectableItemBackground"
+    android:clickable="true"
+    android:padding="@dimen/margin_normal">
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="#e0e0e0"
+        android:layout_marginRight="@dimen/margin_normal"/>
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/image"
+        android:layout_toLeftOf="@+id/follow"
+        android:textColor="#000"
+        tools:text="Aaron Sarazan"/>
+
+    <TextView
+        android:id="@+id/screen_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/name"
+        android:layout_toRightOf="@+id/image"
+        android:layout_toLeftOf="@+id/follow"
+        android:layout_marginTop="@dimen/margin_small"
+        tools:text="\@asarazan"/>
+
+    <Button
+        android:id="@+id/follow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:textSize="@dimen/text_large"
+        android:textColor="@color/black"
+        android:text="@string/follow"/>
+
+</RelativeLayout>

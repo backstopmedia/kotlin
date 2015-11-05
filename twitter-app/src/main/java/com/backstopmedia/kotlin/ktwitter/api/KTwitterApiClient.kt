@@ -7,6 +7,7 @@ import com.twitter.sdk.android.core.TwitterSession
 import com.twitter.sdk.android.core.models.Tweet
 import com.twitter.sdk.android.core.models.User
 import retrofit.http.GET
+import retrofit.http.POST
 import retrofit.http.Path
 import retrofit.http.Query
 import rx.Observable
@@ -38,4 +39,7 @@ interface KTwitterApi {
 
     @GET("/1.1/friends/ids.json")
     fun following(@Query("user_id") user: Long): Observable<UserIdList>
+
+    @POST("/1.1/friendships/create.json")
+    fun follow(@Query("user_id") user: Long, @Query("follow") follow: Boolean): Observable<User>
 }

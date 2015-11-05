@@ -26,6 +26,7 @@ import com.backstopmedia.kotlin.ktwitter.presenters.NavigationDrawerPresenter
 import com.backstopmedia.kotlin.ktwitter.presenters.NavigationDrawerPresenterImpl
 import com.backstopmedia.kotlin.ktwitter.ui.activities.TimelineActivity
 import com.backstopmedia.kotlin.ktwitter.ui.activities.TopImagesActivity
+import com.backstopmedia.kotlin.ktwitter.ui.activities.TopUsersActivity
 import com.backstopmedia.kotlin.ktwitter.ui.view.NavigationDrawerView
 import com.backstopmedia.kotlin.ktwitter.utils.functional.toMultimapBy
 import com.backstopmedia.kotlin.ktwitter.utils.glide.CircleTransformation
@@ -96,17 +97,6 @@ class NavigationHelper : Fragment(), NavigationDrawerView {
 
     private fun setupNavigationView() {
         navigationView.setNavigationItemSelectedListener {
-            if (it.itemId == R.id.drawer_recommend) {
-                Twitter.getSessionManager().activeSession.let {
-                    TopUsersInteractorImpl(it).getTopUsers(it.userId)
-                            .observeOn(AndroidSchedulers.mainThread())
-                            .subscribeOn(Schedulers.io())
-                            .subscribe {
-                                val log = it.map { "${it.user.screenName} (${it.rank})" }
-                                Log.d("Recommend", log.toString())
-                            }
-                }
-            }
             val intent = when (it.itemId) {
                 R.id.drawer_timeline ->
                     if (activity is TimelineActivity) null
@@ -114,6 +104,9 @@ class NavigationHelper : Fragment(), NavigationDrawerView {
                 R.id.drawer_top_images ->
                     if (activity is TopImagesActivity) null
                     else Intent(activity, TopImagesActivity::class.java)
+                R.id.drawer_recommend ->
+                    if (activity is TopUsersActivity) null
+                    else Intent(activity, TopUsersActivity::class.java)
                 else -> null
             }
 
