@@ -46,6 +46,11 @@ class TopUsersActivity : AppCompatActivity(), TopUsersView {
         }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter.dropView(this)
+    }
+
     override fun bind(users: List<User>) {
         recycler_view.adapter = TopUsersAdapter(users) {
             startActivity(Intent(this, TopUsersActivity::class.java).putExtra("userId", it.id))
