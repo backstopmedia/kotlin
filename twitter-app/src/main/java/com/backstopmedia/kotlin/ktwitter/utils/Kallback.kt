@@ -49,6 +49,15 @@ open class Kallback<T>(private val onSuccess: (Result<T>) -> Unit) : Callback<T>
     private var onFail: ((TwitterException) -> Unit)? = null
 
     /**
+     * You may want to take an existing callback
+     * and fork it with new [onSuccess] or [onFail]
+     * @constructor copy constructor
+     */
+    constructor(other: Kallback<T>) : this(other.onSuccess) {
+        onFail = other.onFail
+    }
+
+    /**
      * Sets failure behavior. Can be chained from [kallback] or constructor.
      *
      * @param onFail block to run on failed request.
