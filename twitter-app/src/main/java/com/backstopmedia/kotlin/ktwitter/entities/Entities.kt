@@ -44,6 +44,9 @@ data class RankedUser(val user: User, val tweets: List<Tweet>, val rank: Int) {
     }
 }
 
+/**
+ * Gson object for a list of user ids.
+ */
 open class UserIdList {
 
     @JvmField

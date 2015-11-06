@@ -44,6 +44,7 @@ fun Tweet.post(callback: Callback<Tweet>) {
 fun tweetAboutHowGreatKotlinBuildersAre() {
     tweet {
         text = "Hey I'm tweeting with Kotlin builders!"
+		possiblySensitive = false
     }.post(kallback<Tweet> {
         Log.d("Tweets", "Successfully tweeted ${it.data.id}")
     } onFail {
