@@ -39,19 +39,21 @@ class UsersViewHolder : RecyclerView.ViewHolder {
     constructor(itemView: View?) : super(itemView)
 
     fun bind(user: User, onClick: (User) -> Unit) {
-        itemView.name.text = user.name
-        itemView.screen_name.text = user.screenName
-        Glide.with(itemView.context).load(user.profileImageUrlHttps).into(itemView.image)
-        itemView.setOnClickListener {
-            onClick(user)
-        }
-        itemView.follow.setOnClickListener {
-            KTwitterApiClient(Twitter.getSessionManager().activeSession).kTwitterApi.follow(user.id, true)
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribeOn(Schedulers.io())
-                    .subscribe {
-                        itemView.context.toast("Followed ${user.screenName}!")
-                    }
+        with(user) {
+            itemView.name.text = name
+            itemView.screen_name.text = screenName
+            Glide.with(itemView.context).load(profileImageUrlHttps).into(itemView.image)
+            itemView.setOnClickListener {
+                onClick(this)
+            }
+            itemView.follow.setOnClickListener {
+                KTwitterApiClient(Twitter.getSessionManager().activeSession).kTwitterApi.follow(id, true)
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeOn(Schedulers.io())
+                        .subscribe {
+                            itemView.context.toast("Followed $screenName!")
+                        }
+            }
         }
     }
 
