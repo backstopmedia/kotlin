@@ -5,5 +5,8 @@
     <string name="navigation_view.top_images">Top Images</string>
     <string name="ktwitter">KTwitter</string>
     <string name="no_tweets">No Tweets</string>
+    <string name="navigation_view.who_to_follow">Who To Follow</string>
+    <string name="follow">Follow</string>
+    <string name="following">Following</string>
 
 </resources>

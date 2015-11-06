@@ -35,6 +35,10 @@
             android:name="com.backstopmedia.kotlin.ktwitter.ui.activities.TopImagesActivity"
             android:label="@string/navigation_view.top_images" />
 
+        <activity
+            android:name=".ui.activities.TopUsersActivity"
+            android:label="@string/navigation_view.who_to_follow"/>
+
     </application>
 
 </manifest>
