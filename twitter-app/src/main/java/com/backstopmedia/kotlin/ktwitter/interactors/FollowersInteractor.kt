@@ -17,7 +17,7 @@ class FollowersInteractorImpl(val session: TwitterSession) : FollowersInteractor
 
     override fun getFollowers(userId: Long): Observable<List<FollowingUser>> {
         return kTwitterApi.getFollowers(userId, count = 200).map {
-            it.users.sortedBy { it.name }
+            it.users.sortedBy { it.name.toLowerCase() }
         }.zipWith(kTwitterApi.following(userId)) { followers, following ->
             followers.map {
                 FollowingUser(it, it.id in following.ids)
