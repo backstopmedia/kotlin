@@ -9,19 +9,14 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        when (TwitterCore.getInstance()?.sessionManager?.activeSession) {
-            null -> goToLogin()
-            else -> goToTimeline()
+        finish()
+        startActivity(redirectIntent())
+    }
+
+    private fun redirectIntent(): Intent {
+        return when (TwitterCore.getInstance()?.sessionManager?.activeSession) {
+            null -> Intent(this, LoginActivity::class.java)
+            else -> Intent(this, TimelineActivity::class.java)
         }
-    }
-
-    private fun goToLogin() {
-        finish()
-        startActivity(Intent(this, LoginActivity::class.java))
-    }
-
-    private fun goToTimeline() {
-        finish()
-        startActivity(Intent(this, TimelineActivity::class.java))
     }
 }
