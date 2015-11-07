@@ -17,7 +17,7 @@ import com.backstopmedia.kotlin.ktwitter.ui.NavigationHelper
 import com.backstopmedia.kotlin.ktwitter.ui.adapter.TopImagesAdapter
 import com.backstopmedia.kotlin.ktwitter.ui.adapter.TopUsersAdapter
 import com.backstopmedia.kotlin.ktwitter.ui.view.TopUsersView
-import com.backstopmedia.kotlin.ktwitter.utils.os.getFromIntent
+import com.backstopmedia.kotlin.ktwitter.utils.os.getExtra
 import com.twitter.sdk.android.core.TwitterCore
 import com.twitter.sdk.android.core.models.User
 import kotlinx.android.synthetic.activity_top_images.*
@@ -30,7 +30,7 @@ import org.jetbrains.anko.toast
 class TopUsersActivity : AppCompatActivity(), TopUsersView {
 
     private val userId by lazy {
-        getFromIntent<Long>("userId")
+        getExtra<Long>("userId")
     }
 
     private val interactor: TopUsersInteractor by lazy { TopUsersInteractorImpl(TwitterCore.getInstance().sessionManager.activeSession) }
