@@ -7,10 +7,6 @@ import com.twitter.sdk.android.core.TwitterSession
 import com.twitter.sdk.android.core.models.User
 import rx.Observable
 
-/**
- * @author pawegio
- */
-
 interface FollowersInteractor {
     fun getFollowers(userId: Long): Observable<List<FollowingUser>>
 }
