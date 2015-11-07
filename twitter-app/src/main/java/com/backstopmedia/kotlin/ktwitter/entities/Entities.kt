@@ -54,3 +54,13 @@ open class UserIdList {
     var ids: List<Long> = listOf()
 
 }
+
+data class FollowingUser(val user: User, val followed: Boolean)
+
+class UsersList {
+
+    @JvmField
+    @SerializedName("users")
+    var users: List<User> = listOf()
+
+}

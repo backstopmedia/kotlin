@@ -14,5 +14,9 @@
             android:id="@+id/drawer_recommend"
             android:icon="@drawable/ic_collections_black_24dp"
             android:title="@string/navigation_view.who_to_follow"/>
+        <item
+            android:id="@+id/drawer_followers"
+            android:icon="@drawable/ic_people_black_24dp"
+            android:title="@string/navigation_view.followers" />
     </group>
 </menu>

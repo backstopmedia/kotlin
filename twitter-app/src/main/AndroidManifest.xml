@@ -39,6 +39,10 @@
             android:name=".ui.activities.TopUsersActivity"
             android:label="@string/navigation_view.who_to_follow"/>
 
+        <activity
+            android:name=".ui.activities.FollowersActivity"
+            android:label="@string/navigation_view.followers" />
+
     </application>
 
 </manifest>

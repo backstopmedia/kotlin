@@ -9,4 +9,8 @@
     <color name="light_gray">#4000</color>
     <color name="lighter_gray">#2000</color>
 
+    <color name="red">#F44336</color>
+    <color name="green">#4CAF50</color>
+    <color name="blue">#2196F3</color>
+
 </resources>
