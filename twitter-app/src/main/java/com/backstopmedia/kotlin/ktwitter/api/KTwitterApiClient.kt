@@ -2,6 +2,7 @@ package com.backstopmedia.kotlin.ktwitter.api
 
 import com.backstopmedia.kotlin.ktwitter.entities.UserIdList
 import com.twitter.sdk.android.core.Callback
+import com.backstopmedia.kotlin.ktwitter.entities.UsersList
 import com.twitter.sdk.android.core.TwitterApiClient
 import com.twitter.sdk.android.core.TwitterSession
 import com.twitter.sdk.android.core.models.Tweet
@@ -42,4 +43,7 @@ interface KTwitterApi {
 
     @POST("/1.1/friendships/create.json")
     fun follow(@Query("user_id") user: Long, @Query("follow") follow: Boolean): Observable<User>
+
+    @GET("/1.1/followers/list.json")
+    fun getFollowers(@Query("user_id") user: Long, @Query("count") count: Int? = null): Observable<UsersList>
 }

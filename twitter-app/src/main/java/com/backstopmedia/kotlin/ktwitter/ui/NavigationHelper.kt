@@ -24,6 +24,7 @@ import com.backstopmedia.kotlin.ktwitter.interactors.UserInteractor
 import com.backstopmedia.kotlin.ktwitter.interactors.UserInteractorImpl
 import com.backstopmedia.kotlin.ktwitter.presenters.NavigationDrawerPresenter
 import com.backstopmedia.kotlin.ktwitter.presenters.NavigationDrawerPresenterImpl
+import com.backstopmedia.kotlin.ktwitter.ui.activities.FollowersActivity
 import com.backstopmedia.kotlin.ktwitter.ui.activities.TimelineActivity
 import com.backstopmedia.kotlin.ktwitter.ui.activities.TopImagesActivity
 import com.backstopmedia.kotlin.ktwitter.ui.activities.TopUsersActivity
@@ -107,6 +108,9 @@ class NavigationHelper : Fragment(), NavigationDrawerView {
                 R.id.drawer_recommend ->
                     if (activity is TopUsersActivity) null
                     else Intent(activity, TopUsersActivity::class.java)
+                R.id.drawer_followers ->
+                    if (activity is FollowersActivity) null
+                    else Intent(activity, FollowersActivity::class.java)
                 else -> null
             }
 
