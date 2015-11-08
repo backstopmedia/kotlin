@@ -19,25 +19,6 @@ class TopUsersInteractorImpl(val session: TwitterSession) : TopUsersInteractor {
     private val kTwitterApi: KTwitterApi = KTwitterApiClient(session).kTwitterApi
 
     /**
-     * Takes [getFavoriteUsers] and [getRetweetedUsers]
-     * and applies Rx's [zipWith] function to merge the results.
-     *
-     * Ranking algorithm:
-     * 2 pts/retweet
-     * 1 pts/fave
-     */
-    override fun getTopUsers(userId: Long): Observable<List<RankedUser>> {
-        return getFavoriteUsers(userId).zipWith(getRetweetedUsers(userId)) {
-            faves, retweets ->
-            (faves + retweets).let {
-                it.toMultimapBy { it.user }.map {
-                    it.value.first() + it.value.lastOrNull()
-                }.sortedByDescending { it.rank }
-            }
-        }
-    }
-
-    /**
      * Get a list of the most faved users in your last [count] tweets
      * Also resolves following status via a separate [kTwitterApi.getFollowing] call
      */
@@ -62,6 +43,25 @@ class TopUsersInteractorImpl(val session: TwitterSession) : TopUsersInteractor {
             tweets.tweetsByUser().map {
                 RankedUser.fromRetweets(userMap[it.key]!!, it.value, following)
             }.sortedByDescending { it.rank }
+        }
+    }
+
+    /**
+     * Takes [getFavoriteUsers] and [getRetweetedUsers]
+     * and applies Rx's [zipWith] function to merge the results.
+     *
+     * Ranking algorithm:
+     * 2 pts/retweet
+     * 1 pts/fave
+     */
+    override fun getTopUsers(userId: Long): Observable<List<RankedUser>> {
+        return getFavoriteUsers(userId).zipWith(getRetweetedUsers(userId)) {
+            faves, retweets ->
+            (faves + retweets).let {
+                it.toMultimapBy { it.user }.map {
+                    it.value.first() + it.value.lastOrNull()
+                }.sortedByDescending { it.rank }
+            }
         }
     }
 }
