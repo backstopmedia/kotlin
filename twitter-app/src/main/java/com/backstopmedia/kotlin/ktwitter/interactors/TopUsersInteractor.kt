@@ -23,8 +23,8 @@ class TopUsersInteractorImpl(val session: TwitterSession) : TopUsersInteractor {
     private val kTwitterApi: KTwitterApi = KTwitterApiClient(session).kTwitterApi
 
     override fun getFavoriteUsers(userId: Long): Observable<List<RankedUser>> {
-        return kTwitterApi.faves(user = userId, count = 1000)
-                .zipWith(kTwitterApi.following(session.userId).map { it.ids.toSet() }) {
+        return kTwitterApi.getFaves(user = userId, count = 1000)
+                .zipWith(kTwitterApi.getFollowing(session.userId).map { it.ids.toSet() }) {
                     tweets, following ->
                     val userMap = tweets.map { it.user }.toMapBy { it.id }
                     tweets.toMultimapBy { it.user.id }
@@ -36,7 +36,7 @@ class TopUsersInteractorImpl(val session: TwitterSession) : TopUsersInteractor {
     override fun getRetweetedUsers(userId: Long): Observable<List<RankedUser>> {
         return kTwitterApi.userTimeline(user = userId, count = 1000).map {
             it.map { it.retweetedStatus }.filterNotNull()
-        }.zipWith(kTwitterApi.following(session.userId).map { it.ids.toSet() }) {
+        }.zipWith(kTwitterApi.getFollowing(session.userId).map { it.ids.toSet() }) {
             tweets, following ->
             val userMap = tweets.map { it.user }.toMapBy { it.id }
             tweets.toMultimapBy { it.user.id }
@@ -58,7 +58,7 @@ class TopUsersInteractorImpl(val session: TwitterSession) : TopUsersInteractor {
                 }
                 .let {
                     if (filterFriends) {
-                        it.zipWith(kTwitterApi.following(userId)) {
+                        it.zipWith(kTwitterApi.getFollowing(userId)) {
                             users, following ->
                             following.ids.toSet().let {
                                 ids ->

@@ -35,15 +35,15 @@ interface KTwitterApi {
     fun getUser(@Query("screen_name") screenName: String, @Query("include_entities") includeEntities: Boolean = true): Observable<User>
 
     @GET("/1.1/favorites/list.json")
-    fun faves(@Query("user_id") user: Long,
+    fun getFaves(@Query("user_id") user: Long,
               @Query("count") count: Int? = null): Observable<List<Tweet>>
 
     @GET("/1.1/friends/ids.json")
-    fun following(@Query("user_id") user: Long): Observable<UserIdList>
-
-    @POST("/1.1/friendships/create.json")
-    fun follow(@Query("user_id") user: Long, @Query("follow") follow: Boolean): Observable<User>
+    fun getFollowing(@Query("user_id") user: Long): Observable<UserIdList>
 
     @GET("/1.1/followers/list.json")
     fun getFollowers(@Query("user_id") user: Long, @Query("count") count: Int? = null): Observable<UsersList>
+
+    @POST("/1.1/friendships/create.json")
+    fun follow(@Query("user_id") user: Long, @Query("follow") follow: Boolean): Observable<User>
 }
