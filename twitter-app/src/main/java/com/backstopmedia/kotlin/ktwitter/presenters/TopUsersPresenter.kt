@@ -19,7 +19,7 @@ class TopUsersPresenterImpl(val interactor: TopUsersInteractor, val userId: Long
 
     override fun takeView(view: TopUsersView) {
         val nonNullUid = userId ?: Twitter.getSessionManager().activeSession.userId
-        val sub = interactor.getTopUsers(nonNullUid, false)
+        val sub = interactor.getTopUsers(nonNullUid)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : BaseSubscriber<List<RankedUser>>() {

@@ -30,7 +30,7 @@ data class Profile(val handle: String, val avatarUrl: String) {
  * We've also added a [following] boolean, which is mutable so that we don't have to
  * hit the server again just to reflect that a follow operation succeeded.
  */
-data class RankedUser(val user: User, val tweets: List<Tweet>, val rank: Int, var following: Boolean) {
+data class RankedUser(val user: User, val rank: Int, var following: Boolean) {
 
     companion object {
 
@@ -38,15 +38,21 @@ data class RankedUser(val user: User, val tweets: List<Tweet>, val rank: Int, va
          * Retweets are worth twice as much as faves.
          */
         fun fromRetweets(user: User, tweets: List<Tweet>, following: Set<Long>): RankedUser {
-            return RankedUser(user, tweets, tweets.size * 2, user.id in following)
+            return RankedUser(user, tweets.size * 2, user.id in following)
         }
 
         /**
          * Faves are still pretty good.
          */
         fun fromFaves(user: User, tweets: List<Tweet>, following: Set<Long>): RankedUser {
-            return RankedUser(user, tweets, tweets.size, user.id in following)
+            return RankedUser(user, tweets.size, user.id in following)
         }
+    }
+
+    operator fun plus(other: RankedUser?): RankedUser {
+        if (other == null) return this
+        if (user.id != other.user.id) throw IllegalArgumentException("Illegal attempt to combine user ${user.id} with ${other.user.id}")
+        return RankedUser(user, rank + other.rank, following || other.following)
     }
 
     override fun equals(other: Any?): Boolean {
