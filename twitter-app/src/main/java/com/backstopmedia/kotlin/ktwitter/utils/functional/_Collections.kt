@@ -1,5 +1,6 @@
 package com.backstopmedia.kotlin.ktwitter.utils.functional
 
+import android.util.Log
 import java.util.*
 
 fun <K, V> List<V>.toMultimapBy(fn: (V) -> K): Map<K, List<V>> {

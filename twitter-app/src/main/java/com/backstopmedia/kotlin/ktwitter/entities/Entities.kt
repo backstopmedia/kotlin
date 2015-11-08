@@ -48,6 +48,14 @@ data class RankedUser(val user: User, val tweets: List<Tweet>, val rank: Int, va
             return RankedUser(user, tweets, tweets.size, user.id in following)
         }
     }
+
+    override fun equals(other: Any?): Boolean {
+        return other is RankedUser && other.user.id == user.id
+    }
+
+    override fun hashCode(): Int {
+        return user.id.hashCode()
+    }
 }
 
 /**

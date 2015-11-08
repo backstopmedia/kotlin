@@ -36,7 +36,7 @@ interface KTwitterApi {
 
     @GET("/1.1/favorites/list.json")
     fun getFaves(@Query("user_id") user: Long,
-              @Query("count") count: Int? = null): Observable<List<Tweet>>
+                 @Query("count") count: Int? = null): Observable<List<Tweet>>
 
     @GET("/1.1/friends/ids.json")
     fun getFollowing(@Query("user_id") user: Long): Observable<UserIdList>
@@ -46,4 +46,12 @@ interface KTwitterApi {
 
     @POST("/1.1/friendships/create.json")
     fun follow(@Query("user_id") user: Long, @Query("follow") follow: Boolean): Observable<User>
+}
+
+fun KTwitterApi.getRetweets(user: Long, count: Int? = null): Observable<List<Tweet>> {
+    return userTimeline(user, count).map { it.map { it.retweetedStatus }.filterNotNull() }
+}
+
+fun KTwitterApi.getFollowingIds(user: Long): Observable<Set<Long>> {
+    return getFollowing(user).map { it.ids.toSet() }
 }
