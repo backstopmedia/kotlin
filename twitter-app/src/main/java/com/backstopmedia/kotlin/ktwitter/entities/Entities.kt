@@ -24,22 +24,22 @@ data class Profile(val handle: String, val avatarUrl: String) {
     }
 }
 
-data class RankedUser(val user: User, val tweets: List<Tweet>, val rank: Int) {
+data class RankedUser(val user: User, val tweets: List<Tweet>, val rank: Int, var following: Boolean) {
 
     companion object {
 
         /**
          * Retweets are worth twice as much as faves.
          */
-        fun fromRetweets(user: User, tweets: List<Tweet>): RankedUser {
-            return RankedUser(user, tweets, tweets.size * 2)
+        fun fromRetweets(user: User, tweets: List<Tweet>, following: Set<Long>): RankedUser {
+            return RankedUser(user, tweets, tweets.size * 2, user.id in following)
         }
 
         /**
          * Faves are okay too, I guess.
          */
-        fun fromFaves(user: User, tweets: List<Tweet>): RankedUser {
-            return RankedUser(user, tweets, tweets.size)
+        fun fromFaves(user: User, tweets: List<Tweet>, following: Set<Long>): RankedUser {
+            return RankedUser(user, tweets, tweets.size, user.id in following)
         }
     }
 }

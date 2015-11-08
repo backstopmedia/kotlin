@@ -1,15 +1,11 @@
 package com.backstopmedia.kotlin.ktwitter.interactors
 
-import android.util.Log
 import com.backstopmedia.kotlin.ktwitter.api.KTwitterApi
 import com.backstopmedia.kotlin.ktwitter.api.KTwitterApiClient
-import com.backstopmedia.kotlin.ktwitter.entities.Profile
 import com.backstopmedia.kotlin.ktwitter.entities.RankedUser
 import com.backstopmedia.kotlin.ktwitter.utils.functional.toMultimapBy
 import com.twitter.sdk.android.core.TwitterSession
 import rx.Observable
-import rx.android.schedulers.AndroidSchedulers
-import rx.schedulers.Schedulers
 
 /**
  * Created by Aaron Sarazan on 11/3/15
@@ -27,21 +23,24 @@ class TopUsersInteractorImpl(val session: TwitterSession) : TopUsersInteractor {
     private val kTwitterApi: KTwitterApi = KTwitterApiClient(session).kTwitterApi
 
     override fun getFavoriteUsers(userId: Long): Observable<List<RankedUser>> {
-        return kTwitterApi.faves(user = userId, count = 1000).map {
-            val userMap = it.map { it.user }.toMapBy { it.id }
-            it.toMultimapBy { it.user.id }
-                    .map { RankedUser.fromFaves(userMap[it.key]!!, it.value) }
-                    .sortedByDescending { it.rank }
-        }
+        return kTwitterApi.faves(user = userId, count = 1000)
+                .zipWith(kTwitterApi.following(session.userId).map { it.ids.toSet() }) {
+                    tweets, following ->
+                    val userMap = tweets.map { it.user }.toMapBy { it.id }
+                    tweets.toMultimapBy { it.user.id }
+                            .map { RankedUser.fromFaves(userMap[it.key]!!, it.value, following) }
+                            .sortedByDescending { it.rank }
+                }
     }
 
     override fun getRetweetedUsers(userId: Long): Observable<List<RankedUser>> {
         return kTwitterApi.userTimeline(user = userId, count = 1000).map {
             it.map { it.retweetedStatus }.filterNotNull()
-        }.map {
-            val userMap = it.map { it.user }.toMapBy { it.id }
-            it.toMultimapBy { it.user.id }
-                    .map { RankedUser.fromRetweets(userMap[it.key]!!, it.value) }
+        }.zipWith(kTwitterApi.following(session.userId).map { it.ids.toSet() }) {
+            tweets, following ->
+            val userMap = tweets.map { it.user }.toMapBy { it.id }
+            tweets.toMultimapBy { it.user.id }
+                    .map { RankedUser.fromRetweets(userMap[it.key]!!, it.value, following) }
                     .sortedByDescending { it.rank }
         }
     }
@@ -49,11 +48,11 @@ class TopUsersInteractorImpl(val session: TwitterSession) : TopUsersInteractor {
     override fun getTopUsers(userId: Long, filterFriends: Boolean): Observable<List<RankedUser>> {
         return getFavoriteUsers(userId)
                 .zipWith(getRetweetedUsers(userId)) {
-                    it1, it2 ->
-                    (it1 + it2).let {
+                    faves, retweets ->
+                    (faves + retweets).let {
                         val userMap = it.map { it.user }.toMapBy { it.id }
                         it.toMultimapBy { it.user.id }.map {
-                            RankedUser(userMap[it.key]!!, it.value.flatMap { it.tweets }, it.value.sumBy { it.rank })
+                            RankedUser(userMap[it.key]!!, it.value.flatMap { it.tweets }, it.value.sumBy { it.rank }, it.value.any { it.following })
                         }.sortedByDescending { it.rank }
                     }
                 }

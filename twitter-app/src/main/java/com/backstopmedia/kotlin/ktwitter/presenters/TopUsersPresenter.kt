@@ -29,7 +29,7 @@ class TopUsersPresenterImpl(val interactor: TopUsersInteractor, val userId: Long
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : BaseSubscriber<List<RankedUser>>() {
                     override fun onNext(t: List<RankedUser>) {
-                        view.bind(t.map { it.user })
+                        view.bind(t)
                     }
                     override fun onError(e: Throwable) {
                         view.showError(error = e)

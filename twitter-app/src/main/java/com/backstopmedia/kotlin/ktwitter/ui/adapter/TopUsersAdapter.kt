@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.backstopmedia.kotlin.ktwitter.R
 import com.backstopmedia.kotlin.ktwitter.api.KTwitterApiClient
+import com.backstopmedia.kotlin.ktwitter.entities.RankedUser
 import com.bumptech.glide.Glide
 import com.twitter.sdk.android.Twitter
 import com.twitter.sdk.android.core.models.User
@@ -20,7 +21,9 @@ import rx.schedulers.Schedulers
  * Created by Aaron Sarazan on 11/4/15
  * Copyright(c) 2015 Level, Inc.
  */
-class TopUsersAdapter(val users: List<User>, val onClick: (User) -> Unit) : RecyclerView.Adapter<UsersViewHolder>() {
+class TopUsersAdapter(users: List<RankedUser>, val onClick: (RankedUser) -> Unit) : RecyclerView.Adapter<TopUsersAdapter.UsersViewHolder>() {
+
+    private val users = users.toArrayList()
 
     override fun getItemCount(): Int {
         return users.size
@@ -31,30 +34,41 @@ class TopUsersAdapter(val users: List<User>, val onClick: (User) -> Unit) : Recy
     }
 
     override fun onBindViewHolder(holder: UsersViewHolder, position: Int) {
-        holder.bind(users[position], onClick)
+        holder.bind(users[position])
     }
-}
 
-class UsersViewHolder : RecyclerView.ViewHolder {
-    constructor(itemView: View?) : super(itemView)
+    public inner class UsersViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
+        fun bind(user: RankedUser) {
+            with(user.user) {
+                itemView.name.text = name
+                itemView.screen_name.text = screenName
+                Glide.with(itemView.context).load(profileImageUrlHttps).into(itemView.image)
+                itemView.setOnClickListener {
+                    onClick(user)
+                }
 
-    fun bind(user: User, onClick: (User) -> Unit) {
-        with(user) {
-            itemView.name.text = name
-            itemView.screen_name.text = screenName
-            Glide.with(itemView.context).load(profileImageUrlHttps).into(itemView.image)
-            itemView.setOnClickListener {
-                onClick(this)
-            }
-            itemView.follow.setOnClickListener {
-                KTwitterApiClient(Twitter.getSessionManager().activeSession).kTwitterApi.follow(id, true)
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribeOn(Schedulers.io())
-                        .subscribe {
-                            itemView.context.toast("Followed $screenName!")
-                        }
+                val applyFollowing = {
+                    with(user.following) {
+                        itemView.follow.isEnabled = !this
+                        itemView.follow.text = if (this) "Following" else "Follow"
+                        itemView.follow.alpha = if (this) 0.5f else 1f
+                    }
+                }
+                applyFollowing()
+                
+                itemView.follow.setOnClickListener {
+                    itemView.follow.isEnabled = false
+                    KTwitterApiClient(Twitter.getSessionManager().activeSession).kTwitterApi.follow(id, true)
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribeOn(Schedulers.io())
+                            .subscribe {
+                                itemView.context.toast("Followed $screenName!")
+                                user.following = true
+                                applyFollowing()
+                            }
+                }
             }
         }
-    }
 
+    }
 }

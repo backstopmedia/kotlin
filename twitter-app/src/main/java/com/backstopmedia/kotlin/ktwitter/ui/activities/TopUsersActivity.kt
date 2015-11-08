@@ -9,6 +9,7 @@ import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import com.backstopmedia.kotlin.ktwitter.R
 import com.backstopmedia.kotlin.ktwitter.entities.Image
+import com.backstopmedia.kotlin.ktwitter.entities.RankedUser
 import com.backstopmedia.kotlin.ktwitter.interactors.TopUsersInteractor
 import com.backstopmedia.kotlin.ktwitter.interactors.TopUsersInteractorImpl
 import com.backstopmedia.kotlin.ktwitter.presenters.TopUsersPresenter
@@ -18,6 +19,7 @@ import com.backstopmedia.kotlin.ktwitter.ui.adapter.TopImagesAdapter
 import com.backstopmedia.kotlin.ktwitter.ui.adapter.TopUsersAdapter
 import com.backstopmedia.kotlin.ktwitter.ui.view.TopUsersView
 import com.backstopmedia.kotlin.ktwitter.utils.os.getExtra
+import com.backstopmedia.kotlin.ktwitter.utils.os.intentExtra
 import com.twitter.sdk.android.core.TwitterCore
 import com.twitter.sdk.android.core.models.User
 import kotlinx.android.synthetic.activity_top_images.*
@@ -29,9 +31,7 @@ import org.jetbrains.anko.toast
  */
 class TopUsersActivity : AppCompatActivity(), TopUsersView {
 
-    private val userId by lazy {
-        getExtra<Long>("userId")
-    }
+    val userId: Long? by intentExtra("userId")
 
     private val interactor: TopUsersInteractor by lazy { TopUsersInteractorImpl(TwitterCore.getInstance().sessionManager.activeSession) }
     private val presenter: TopUsersPresenter by lazy { TopUsersPresenterImpl(interactor, userId) }
@@ -51,9 +51,9 @@ class TopUsersActivity : AppCompatActivity(), TopUsersView {
         presenter.dropView(this)
     }
 
-    override fun bind(users: List<User>) {
+    override fun bind(users: List<RankedUser>) {
         recycler_view.adapter = TopUsersAdapter(users) {
-            startActivity(Intent(this, TopUsersActivity::class.java).putExtra("userId", it.id))
+            startActivity(Intent(this, TopUsersActivity::class.java).putExtra("userId", it.user.id))
         }
     }
 
