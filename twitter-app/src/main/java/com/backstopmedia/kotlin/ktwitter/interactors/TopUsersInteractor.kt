@@ -7,11 +7,6 @@ import com.backstopmedia.kotlin.ktwitter.utils.functional.toMultimapBy
 import com.twitter.sdk.android.core.TwitterSession
 import rx.Observable
 
-/**
- * Created by Aaron Sarazan on 11/3/15
- * Copyright(c) 2015 Level, Inc.
- */
-
 interface TopUsersInteractor {
     fun getFavoriteUsers(userId: Long): Observable<List<RankedUser>>
     fun getRetweetedUsers(userId: Long): Observable<List<RankedUser>>
@@ -22,6 +17,10 @@ class TopUsersInteractorImpl(val session: TwitterSession) : TopUsersInteractor {
 
     private val kTwitterApi: KTwitterApi = KTwitterApiClient(session).kTwitterApi
 
+    /**
+     * Get a list of the most faved users in your last [count] tweets
+     * Also resolves following status via a separate [kTwitterApi.getFollowing] call
+     */
     override fun getFavoriteUsers(userId: Long): Observable<List<RankedUser>> {
         return kTwitterApi.getFaves(user = userId, count = 1000)
                 .zipWith(kTwitterApi.getFollowing(session.userId).map { it.ids.toSet() }) {
@@ -33,6 +32,10 @@ class TopUsersInteractorImpl(val session: TwitterSession) : TopUsersInteractor {
                 }
     }
 
+    /**
+     * Get a list of the most RT'd users in your last [count] tweets
+     * Also resolves following status via a separate [kTwitterApi.getFollowing] call
+     */
     override fun getRetweetedUsers(userId: Long): Observable<List<RankedUser>> {
         return kTwitterApi.userTimeline(user = userId, count = 1000).map {
             it.map { it.retweetedStatus }.filterNotNull()
@@ -45,6 +48,14 @@ class TopUsersInteractorImpl(val session: TwitterSession) : TopUsersInteractor {
         }
     }
 
+    /**
+     * Takes [getFavoriteUsers] and [getRetweetedUsers]
+     * and applies Rx's [zipWith] function to merge the results.
+     *
+     * Ranking algorithm:
+     * 2 pts/retweet
+     * 1 pts/fave
+     */
     override fun getTopUsers(userId: Long, filterFriends: Boolean): Observable<List<RankedUser>> {
         return getFavoriteUsers(userId)
                 .zipWith(getRetweetedUsers(userId)) {

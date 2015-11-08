@@ -25,10 +25,6 @@ import com.twitter.sdk.android.core.models.User
 import kotlinx.android.synthetic.activity_top_images.*
 import org.jetbrains.anko.toast
 
-/**
- * Created by Aaron Sarazan on 11/4/15
- * Copyright(c) 2015 Level, Inc.
- */
 class TopUsersActivity : AppCompatActivity(), TopUsersView {
 
     val userId: Long? by intentExtra("userId")

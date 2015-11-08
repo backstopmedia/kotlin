@@ -24,6 +24,12 @@ data class Profile(val handle: String, val avatarUrl: String) {
     }
 }
 
+/**
+ * A User object, with FaveRank™ technology
+ *
+ * We've also added a [following] boolean, which is mutable so that we don't have to
+ * hit the server again just to reflect that a follow operation succeeded.
+ */
 data class RankedUser(val user: User, val tweets: List<Tweet>, val rank: Int, var following: Boolean) {
 
     companion object {
@@ -36,7 +42,7 @@ data class RankedUser(val user: User, val tweets: List<Tweet>, val rank: Int, va
         }
 
         /**
-         * Faves are okay too, I guess.
+         * Faves are still pretty good.
          */
         fun fromFaves(user: User, tweets: List<Tweet>, following: Set<Long>): RankedUser {
             return RankedUser(user, tweets, tweets.size, user.id in following)

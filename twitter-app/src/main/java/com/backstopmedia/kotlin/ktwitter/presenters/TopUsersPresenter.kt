@@ -11,11 +11,6 @@ import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 import rx.subscriptions.CompositeSubscription
 
-/**
- * Created by Aaron Sarazan on 11/4/15
- * Copyright(c) 2015 Level, Inc.
- */
-
 interface TopUsersPresenter : Presenter<TopUsersView>
 
 class TopUsersPresenterImpl(val interactor: TopUsersInteractor, val userId: Long? = null) : TopUsersPresenter {

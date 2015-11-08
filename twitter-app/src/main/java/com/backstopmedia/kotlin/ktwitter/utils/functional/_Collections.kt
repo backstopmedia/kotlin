@@ -2,11 +2,6 @@ package com.backstopmedia.kotlin.ktwitter.utils.functional
 
 import java.util.*
 
-/**
- * Created by Aaron Sarazan on 11/2/15
- * Copyright(c) 2015 Level, Inc.
- */
-
 fun <K, V> List<V>.toMultimapBy(fn: (V) -> K): Map<K, List<V>> {
     val retval = hashMapOf<K, List<V>>()
     forEach {

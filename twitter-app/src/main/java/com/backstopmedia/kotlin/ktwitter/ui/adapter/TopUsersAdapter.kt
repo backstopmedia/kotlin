@@ -17,10 +17,6 @@ import org.jetbrains.anko.toast
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 
-/**
- * Created by Aaron Sarazan on 11/4/15
- * Copyright(c) 2015 Level, Inc.
- */
 class TopUsersAdapter(users: List<RankedUser>, val onClick: (RankedUser) -> Unit) : RecyclerView.Adapter<TopUsersAdapter.UsersViewHolder>() {
 
     private val users = users.toArrayList()

@@ -9,11 +9,6 @@ import com.twitter.sdk.android.core.Result
 import com.twitter.sdk.android.core.models.*
 
 /**
- * Created by Aaron Sarazan on 10/26/15
- * Copyright(c) 2015 Level, Inc.
- */
-
-/**
  * Allows us to build a tweet via DSL, then post it asynchronously using the API service.
  */
 fun Tweet.post(callback: Callback<Tweet>) {

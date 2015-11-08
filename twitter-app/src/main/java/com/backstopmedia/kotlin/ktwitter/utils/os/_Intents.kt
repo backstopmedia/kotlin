@@ -10,11 +10,6 @@ import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
 
 /**
- * Created by Aaron Sarazan on 11/4/15
- * Copyright(c) 2015 Level, Inc.
- */
-
-/**
  * Delegated Property that will grab its value from the activity's intent.
  *
  * @sample

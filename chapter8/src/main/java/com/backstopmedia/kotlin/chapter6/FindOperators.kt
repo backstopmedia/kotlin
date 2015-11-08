@@ -7,11 +7,6 @@ import android.support.v4.app.FragmentManager
 import android.view.View
 import android.view.ViewGroup
 
-/**
- * Created by Aaron Sarazan on 10/19/15
- * Copyright(c) 2015 Level, Inc.
- */
-
 
 @Suppress("UNCHECKED_CAST")
 operator fun <T : View> Activity.get(resId: Int): T {

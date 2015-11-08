@@ -1,11 +1,5 @@
 package com.backstopmedia.kotlin.chapter6.generics
 
-import java.util.*
-
-/**
- * Created by Aaron Sarazan on 10/25/15
- * Copyright(c) 2015 Level, Inc.
- */
 class Bounds {
 
     fun test() {
