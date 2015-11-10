@@ -8,5 +8,3 @@ import rx.Observable
 fun List<Tweet>.tweetsByUser(): Map<Long, List<Tweet>> {
     return toMultimapBy { it.user.id }
 }
-
-fun List<>
