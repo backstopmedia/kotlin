@@ -11,6 +11,7 @@ import com.backstopmedia.kotlin.ktwitter.presenters.FollowersPresenter
 import com.backstopmedia.kotlin.ktwitter.presenters.FollowersPresenterImpl
 import com.backstopmedia.kotlin.ktwitter.ui.NavigationHelper
 import com.backstopmedia.kotlin.ktwitter.ui.adapter.FollowersAdapter
+import com.backstopmedia.kotlin.ktwitter.ui.adapter.FollowersWithHeadersAdapter
 import com.backstopmedia.kotlin.ktwitter.ui.view.FollowersView
 import com.twitter.sdk.android.core.TwitterCore
 import com.twitter.sdk.android.core.models.User
@@ -35,7 +36,8 @@ class FollowersActivity : AppCompatActivity(), FollowersView {
     }
 
     override fun bind(users: List<FollowingUser>) {
-        recyclerView.adapter = FollowersAdapter(users)
+//        recyclerView.adapter = FollowersAdapter(users)
+        recyclerView.adapter = FollowersWithHeadersAdapter(users)
     }
 
     override fun showError(error: Throwable) {
